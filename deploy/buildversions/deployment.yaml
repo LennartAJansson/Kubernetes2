@@ -24,8 +24,6 @@ spec:
         envFrom:
         - configMapRef:
             name: buildversions-configmap
-        - configMapRef:
-            name: common-configmap
         ports:
         - containerPort: 80
           name: http

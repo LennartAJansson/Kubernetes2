@@ -16,13 +16,3 @@ spec:
             name: buildversionsapi
             port:
               number: 80
-  - host: "buildversionsapi.jansson.today"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: buildversionsapi
-            port:
-              number: 80

@@ -30,8 +30,6 @@ spec:
             name: buildversionsapi-secret
         - configMapRef:
             name: buildversionsapi-configmap
-        - configMapRef:
-            name: common-configmap
         ports:
         - containerPort: 80
           name: http
