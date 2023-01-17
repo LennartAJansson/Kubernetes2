@@ -1,0 +1,128 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65312B32-3EFA-4D7C-B6A1-FB85A83F544B}"
+	ProjectSection(SolutionItems) = preProject
+		BuildWithVersioning.ps1 = BuildWithVersioning.ps1
+		DeployWithVersioning.ps1 = DeployWithVersioning.ps1
+		InitBuild.ps1 = InitBuild.ps1
+		InitDeploy.ps1 = InitDeploy.ps1
+		readme (2).md = readme (2).md
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{988D9AA6-1044-49AA-BF35-9C9F1051729D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversions", "buildversions", "{05751EA3-902D-486E-ABE3-566EECCA6E85}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\buildversions\deployment.yaml = deploy\buildversions\deployment.yaml
+		deploy\buildversions\ingress.yaml = deploy\buildversions\ingress.yaml
+		deploy\buildversions\kustomization.yaml = deploy\buildversions\kustomization.yaml
+		deploy\buildversions\namespace.yaml = deploy\buildversions\namespace.yaml
+		deploy\buildversions\service.yaml = deploy\buildversions\service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversionsapi", "buildversionsapi", "{82AEB6E7-F4EE-4D88-B262-65C7E3818DD1}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\buildversionsapi\configmap.yaml = deploy\buildversionsapi\configmap.yaml
+		deploy\buildversionsapi\create-sealed-secret.ps1 = deploy\buildversionsapi\create-sealed-secret.ps1
+		deploy\buildversionsapi\create-sealed-secret.sh = deploy\buildversionsapi\create-sealed-secret.sh
+		deploy\buildversionsapi\deployment.yaml = deploy\buildversionsapi\deployment.yaml
+		deploy\buildversionsapi\ingress.yaml = deploy\buildversionsapi\ingress.yaml
+		deploy\buildversionsapi\kustomization.yaml = deploy\buildversionsapi\kustomization.yaml
+		deploy\buildversionsapi\namespace.yaml = deploy\buildversionsapi\namespace.yaml
+		deploy\buildversionsapi\persistentvolume.yaml = deploy\buildversionsapi\persistentvolume.yaml
+		deploy\buildversionsapi\persistentvolumeclaim.yaml = deploy\buildversionsapi\persistentvolumeclaim.yaml
+		deploy\buildversionsapi\secret.yaml = deploy\buildversionsapi\secret.yaml
+		deploy\buildversionsapi\service.yaml = deploy\buildversionsapi\service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secrets", "secrets", "{C4969B04-8C9D-4042-82E1-0EC459292494}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb = deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb
+		deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsIdentity = deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsIdentity
+	EndProjectSection
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BuildVersions", "BuildVersions\BuildVersions.esproj", "{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi", "BuildVersionsApi\BuildVersionsApi.csproj", "{B71E4F28-EB75-45D2-AF9D-601204E8844B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.App", "BuildVersionsApi.App\BuildVersionsApi.App.csproj", "{BFF5322A-D46F-4794-829A-94758A6A21DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Contract", "BuildVersionsApi.Contract\BuildVersionsApi.Contract.csproj", "{530E56A5-8956-408D-AF29-81E8CEDF0BBF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Data", "BuildVersionsApi.Data\BuildVersionsApi.Data.csproj", "{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Mediator", "BuildVersionsApi.Mediator\BuildVersionsApi.Mediator.csproj", "{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Model", "BuildVersionsApi.Model\BuildVersionsApi.Model.csproj", "{33753D2F-EF96-401C-BEF7-0CAC905C34E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsConsole", "BuildVersionsConsole\BuildVersionsConsole.csproj", "{2EE95CF5-5950-4170-A17D-067F896D3091}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Containers.Common.Types", "Containers.Common.Types\Containers.Common.Types.csproj", "{D7878B8C-E4F4-48CD-B4DC-096DD48F99B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Containers.Common.HealthCheck", "Containers.Common.HealthCheck\Containers.Common.HealthCheck.csproj", "{7CEBEF73-B720-4F58-A13C-CDAABA9ED022}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{114940A4-A2F6-4DB6-8377-7DF5B9AAECC5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE95CF5-5950-4170-A17D-067F896D3091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE95CF5-5950-4170-A17D-067F896D3091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE95CF5-5950-4170-A17D-067F896D3091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE95CF5-5950-4170-A17D-067F896D3091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7878B8C-E4F4-48CD-B4DC-096DD48F99B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7878B8C-E4F4-48CD-B4DC-096DD48F99B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7878B8C-E4F4-48CD-B4DC-096DD48F99B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7878B8C-E4F4-48CD-B4DC-096DD48F99B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEBEF73-B720-4F58-A13C-CDAABA9ED022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEBEF73-B720-4F58-A13C-CDAABA9ED022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEBEF73-B720-4F58-A13C-CDAABA9ED022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEBEF73-B720-4F58-A13C-CDAABA9ED022}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{05751EA3-902D-486E-ABE3-566EECCA6E85} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{82AEB6E7-F4EE-4D88-B262-65C7E3818DD1} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{C4969B04-8C9D-4042-82E1-0EC459292494} = {82AEB6E7-F4EE-4D88-B262-65C7E3818DD1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E98CD0B2-F671-442D-B4E9-238E4474AC80}
+	EndGlobalSection
+EndGlobal
