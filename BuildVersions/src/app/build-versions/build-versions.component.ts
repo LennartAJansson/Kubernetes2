@@ -20,13 +20,12 @@ export class BuildVersionsComponent implements OnInit {
 
   constructor(http: HttpClient) {
     console.log(environment.baseUrl + '/buildversions/getall');
-    http.get<ResponseObject<BuildVersion[]>>(environment.baseUrl + '/buildversions/getall').
+    http.get<BuildVersion[]>(environment.baseUrl + '/buildversions/getall').
       subscribe(result => {
         if (result)
-          if (result.succeeded)
-            this.buildVersions = result.data;
-          else
-            console.error(result.message)
+          this.buildVersions = result;
+        else
+          console.error("Error")
       }, error => console.error(error));
   }
 

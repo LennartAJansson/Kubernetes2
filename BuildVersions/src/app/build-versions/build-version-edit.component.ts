@@ -78,9 +78,9 @@ export class BuildVersionEditComponent implements OnInit {
     if (this.id) {
       // EDIT MODE
         var url = environment.baseUrl + "/buildversions/getversionbyid/" + this.id;
-      this.http.get<ResponseObject<BuildVersion>>(url)
+      this.http.get<BuildVersion>(url)
         .subscribe(result => {
-          this.buildVersion = result.data;
+          this.buildVersion = result;
           this.title = "Edit - " + this.buildVersion.projectName;
           this.form.patchValue(this.buildVersion);
         }, error => console.error(error));
@@ -104,7 +104,7 @@ export class BuildVersionEditComponent implements OnInit {
         // EDIT mode
         buildversion.id = this.id!;
         var url = environment.baseUrl + '/buildversions/updateproject';
-        this.http.put<ResponseObject<BuildVersion>>(url, buildversion)
+        this.http.put<BuildVersion>(url, buildversion)
           .subscribe(result => {
             console.log("BuildVersion " + buildversion!.id + " has been updated.");
             this.router.navigate(['/buildversions']);
@@ -114,9 +114,9 @@ export class BuildVersionEditComponent implements OnInit {
         // ADD NEW mode
         buildversion.id = 0;
         var url = environment.baseUrl + '/buildversions/createproject';
-        this.http.post<ResponseObject<BuildVersion>>(url, buildversion)
+        this.http.post<BuildVersion>(url, buildversion)
           .subscribe(result => {
-            console.log("BuildVersion " + result.data.id + " has been created.");
+            console.log("BuildVersion " + result.id + " has been created.");
             this.router.navigate(['/buildversions']);
           }, error => console.error(error));
       }

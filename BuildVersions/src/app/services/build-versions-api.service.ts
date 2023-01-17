@@ -21,9 +21,11 @@ export class BuildVersionsApiService {
 
   createProject(buildVersion: BuildVersion) {
     var url = this.baseUrl + '/buildversions/createproject';
-    this.http.post<ResponseObject<BuildVersion>>(url, buildVersion)
+    //this.http.post<ResponseObject<BuildVersion>>(url, buildVersion)
+    this.http.post<BuildVersion>(url, buildVersion)
       .subscribe(result => {
-        console.log("BuildVersion " + result.data.id + " has been created.");
+        //console.log("BuildVersion " + result.data.id + " has been created.");
+        console.log("BuildVersion " + result.id + " has been created.");
         return true;
       }, error => {
         console.error(error);
@@ -33,9 +35,11 @@ export class BuildVersionsApiService {
 
   updateProject(buildVersion: BuildVersion) {
     var url = this.baseUrl + '/buildversions/updateproject';
-    this.http.put<ResponseObject<BuildVersion>>(url, buildVersion)
+    //this.http.put<ResponseObject<BuildVersion>>(url, buildVersion)
+    this.http.put<BuildVersion>(url, buildVersion)
       .subscribe(result => {
-        console.log("BuildVersion " + result.data.id + " has been updated.");
+        //console.log("BuildVersion " + result.data.id + " has been updated.");
+        console.log("BuildVersion " + result.id + " has been updated.");
         return true;
       }, error => {
         console.error(error);
@@ -45,10 +49,12 @@ export class BuildVersionsApiService {
 
   getVersionById(id: number): BuildVersion|null {
     var url = this.baseUrl + "/buildversions/getversionbyid?id=" + id;
-    this.http.get<ResponseObject<BuildVersion>>(url)
+    //this.http.get<ResponseObject<BuildVersion>>(url)
+    this.http.get<BuildVersion>(url)
       .subscribe(result => {
         console.log(result);
-        return result.data;
+        //return result.data;
+        return result;
       }, error => {
         console.error(error);
         return null;
@@ -58,10 +64,12 @@ export class BuildVersionsApiService {
 
   getVersionByName(projectName: string): BuildVersion | null {
     var url = this.baseUrl + "/buildversions/getversionbyname?name=" + projectName;
-    this.http.get<ResponseObject<BuildVersion>>(url)
+    //this.http.get<ResponseObject<BuildVersion>>(url)
+    this.http.get<BuildVersion>(url)
       .subscribe(result => {
         console.log(result);
-        return result.data;
+        //return result.data;
+        return result;
       }, error => {
         console.error(error);
       });
@@ -70,10 +78,12 @@ export class BuildVersionsApiService {
 
   getAll(): BuildVersion[] | null {
     var url = this.baseUrl + "/buildversions/getall";
-    this.http.get<ResponseObject<BuildVersion[]>>(url)
+    //this.http.get<ResponseObject<BuildVersion[]>>(url)
+    this.http.get<BuildVersion[]>(url)
       .subscribe(result => {
         console.log(result);
-        return result.data;
+        //return result.data;
+        return result;
       }, error => {
         console.error(error);
       });
