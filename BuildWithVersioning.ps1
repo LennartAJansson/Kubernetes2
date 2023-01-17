@@ -10,14 +10,7 @@ if($alive -ne "pong")
 
 foreach($name in @(
 	"buildversions", 
-	"buildversionsapi", 
-	"customerapi", 
-	"employeeapi",
-	"clusterauth",
-	"workloads",
-	"workloadsbff",
-	"workloadsapi",
-	"workloadsprojector"
+	"buildversionsapi"
 ))
 {
 	$branch = git rev-parse --abbrev-ref HEAD

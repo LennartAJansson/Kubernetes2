@@ -10,14 +10,7 @@ if($alive -ne "pong")
 
 foreach($name in @(
 	"buildversions", 
-	"buildversionsapi", 
-	"customerapi", 
-	"employeeapi",
-	"clusterauth",
-	"workloadsbff",
-	"workloads",
-	"workloadsapi",
-	"workloadsprojector"
+	"buildversionsapi"
 ))
 {
 	$buildVersion = $null

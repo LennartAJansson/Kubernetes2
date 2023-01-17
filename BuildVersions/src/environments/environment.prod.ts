@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://workloadsbff.local:8081',
-  apiUrl: 'http://workloadsbff.local:8081'
+  baseUrl: 'http://workloadsapi.local:8081/',
+  apiUrl: 'http://workloadsapi.local:8081/'
 };
