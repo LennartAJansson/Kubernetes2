@@ -34,6 +34,6 @@ foreach($name in @(
 	}
 
 	#Add current built
-	$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
-	curl.exe -X POST http://buildversionsapi.local:8081/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
+	#$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
+	#curl.exe -X POST http://buildversionsapi.local:8081/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
 }
