@@ -10,6 +10,13 @@ In solution folder run AddKubernetesToDocker.ps1
 When docker complains, choose to start up the wsl again  
 
 ## Update Angular:  
+nvm install 16.18.1  
+nvm use 16.18.1  
+
+ng generate component BuildVersions --module=app --skip-tests  
+ng generate component BuildVersionEdit --flat --module=app --skip-tests  
+ng generate service ApiService --flat --module=app --skip-tests  
+
 cd buildversions  
 ng update --allow-dirty @angular/cdk @angular/cli @angular/core @angular/material  
 cd ..  
