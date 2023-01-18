@@ -29,9 +29,6 @@ public class ICMPHealthCheck : IHealthCheck
 
     public HealthCheckResult CheckHealth(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
-        //TODO Come up with a much better HealthCheck
-        //return HealthCheckResult.Healthy($"Fake healthy. Please complete the Containers.Common.HealthCheck.HealthChecks.ICMPHealthCheck.cs");
-
         string resolve = string.Empty;
         try
         {
@@ -50,10 +47,10 @@ public class ICMPHealthCheck : IHealthCheck
             {
                 DontFragment = true
             };
-            string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             byte[] buffer = Encoding.ASCII.GetBytes(data);
-            int timeout = 300;//120
-            PingReply reply = ping.SendPingAsync(ip, timeout, buffer, options).GetAwaiter().GetResult();
+            int timeout = healthyRoundtripTime;
+            PingReply reply = ping.Send(ip, healthyRoundtripTime, buffer, options);
             switch (reply.Status)
             {
                 case IPStatus.Success:
@@ -68,7 +65,7 @@ public class ICMPHealthCheck : IHealthCheck
         }
         catch (Exception e)
         {
-            string err = $"{title} to {host} failed: {e.Message}. {resolve}";
+            string err = $"{title} to {host} failed: {e.Message}. {resolve} {e.InnerException!.Message}";
             return HealthCheckResult.Unhealthy(err);
         }
     }

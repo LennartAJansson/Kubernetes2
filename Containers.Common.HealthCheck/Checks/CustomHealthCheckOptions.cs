@@ -18,16 +18,14 @@ public class CustomHealthCheckOptions : HealthCheckOptions
 
         ResponseWriter = async (c, r) =>
         {
-            c.Response.ContentType =
-            MediaTypeNames.Application.Json;
+            c.Response.ContentType = MediaTypeNames.Application.Json;
             c.Response.StatusCode = StatusCodes.Status200OK;
             string result = JsonSerializer.Serialize(new
             {
                 checks = r.Entries.Select(e => new
                 {
                     name = e.Key,
-                    responseTime =
-                e.Value.Duration.TotalMilliseconds,
+                    responseTime = e.Value.Duration.TotalMilliseconds,
                     status = e.Value.Status.ToString(),
                     description = e.Value.Description
                 }),
