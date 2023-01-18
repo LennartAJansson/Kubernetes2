@@ -10,7 +10,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["BuildVersionsApi/BuildVersionsApi.csproj", "BuildVersionsApi/"]
-COPY ["BuildVersionsApi.App/BuildVersionsApi.App.csproj", "BuildVersionsApi.App/"]
 COPY ["BuildVersionsApi.Contract/BuildVersionsApi.Contract.csproj", "BuildVersionsApi.Contract/"]
 COPY ["BuildVersionsApi.Data/BuildVersionsApi.Data.csproj", "BuildVersionsApi.Data/"]
 COPY ["BuildVersionsApi.Mediator/BuildVersionsApi.Mediator.csproj", "BuildVersionsApi.Mediator/"]

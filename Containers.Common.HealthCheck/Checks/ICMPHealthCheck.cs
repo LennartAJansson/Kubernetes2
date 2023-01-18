@@ -2,6 +2,9 @@
 
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
 using System.Threading.Tasks;
 
 public class ICMPHealthCheck : IHealthCheck
@@ -27,50 +30,47 @@ public class ICMPHealthCheck : IHealthCheck
     public HealthCheckResult CheckHealth(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
         //TODO Come up with a much better HealthCheck
-        return HealthCheckResult.Healthy($"Fake healthy. Please complete the Containers.Common.HealthCheck.HealthChecks.ICMPHealthCheck.cs");
+        //return HealthCheckResult.Healthy($"Fake healthy. Please complete the Containers.Common.HealthCheck.HealthChecks.ICMPHealthCheck.cs");
 
-        //string resolve;
-        //try
-        //{
-        //    IPHostEntry iph = Dns.GetHostEntry(host!);
-        //    string ip;
-        //    if (iph != null)
-        //    {
-        //        ip = (iph != null && iph.AddressList != null && iph.AddressList.Length > 0)
-        //            ? iph.AddressList[0].ToString()
-        //            : string.Empty;
-        //        resolve = $"Resolved {host} to {iph!.HostName} and ipaddress {ip} ";
-        //    }
+        string resolve = string.Empty;
+        try
+        {
+            IPHostEntry iph = Dns.GetHostEntry(host!);
+            string ip = string.Empty;
+            if (iph != null)
+            {
+                ip = (iph != null && iph.AddressList != null && iph.AddressList.Length > 0)
+                    ? iph.AddressList[0].ToString()
+                    : string.Empty;
+                resolve = $"Resolved {host} to {iph!.HostName} and ipaddress {ip} ";
+            }
 
-        //    using Ping ping = new();
-        //    PingOptions options = new()
-        //    {
-        //        DontFragment = true
-        //    };
-        //    string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        //    byte[] buffer = Encoding.ASCII.GetBytes(data);
-        //    int timeout = 300;//120
-        //    PingReply reply = await ping.SendPingAsync(ip, timeout, buffer, options);
-        //    //PingReply reply = await ping.SendPingAsync(host!, timeout, buffer, options);
-
-        //    //PingReply reply = await ping.SendPingAsync(host);
-        //    switch (reply.Status)
-        //    {
-        //        case IPStatus.Success:
-        //            string msg = $"{title} to {host} took {reply.RoundtripTime} ms. {resolve}";
-        //            return reply.RoundtripTime > healthyRoundtripTime
-        //                ? HealthCheckResult.Degraded(msg)
-        //                : HealthCheckResult.Healthy(msg);
-        //        default:
-        //            string err = $"{title} to {host} failed: {reply.Status}. {resolve}";
-        //            return HealthCheckResult.Unhealthy(err);
-        //    }
-        //}
-        //catch (Exception e)
-        //{
-        //    string err = $"{title} to {host} failed: {e.Message}. {resolve}";
-        //    return HealthCheckResult.Unhealthy(err);
-        //}
+            using Ping ping = new();
+            PingOptions options = new()
+            {
+                DontFragment = true
+            };
+            string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
+            int timeout = 300;//120
+            PingReply reply = ping.SendPingAsync(ip, timeout, buffer, options).GetAwaiter().GetResult();
+            switch (reply.Status)
+            {
+                case IPStatus.Success:
+                    string msg = $"{title} to {host} took {reply.RoundtripTime} ms. {resolve}";
+                    return reply.RoundtripTime > healthyRoundtripTime
+                        ? HealthCheckResult.Degraded(msg)
+                        : HealthCheckResult.Healthy(msg);
+                default:
+                    string err = $"{title} to {host} failed: {reply.Status}. {resolve}";
+                    return HealthCheckResult.Unhealthy(err);
+            }
+        }
+        catch (Exception e)
+        {
+            string err = $"{title} to {host} failed: {e.Message}. {resolve}";
+            return HealthCheckResult.Unhealthy(err);
+        }
     }
 
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
