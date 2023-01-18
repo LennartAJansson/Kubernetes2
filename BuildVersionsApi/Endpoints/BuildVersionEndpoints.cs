@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Routing;
 
 public static class BuildVersionEndpoints
 {
-    //TODO Change this, this is a raw data api, should always return BuildVersionResponse
     public static IEndpointRouteBuilder MapBuildVersionEndpoints(this IEndpointRouteBuilder routes)
     {
         RouteGroupBuilder group = routes.MapGroup("/buildversions")
@@ -27,8 +26,8 @@ public static class BuildVersionEndpoints
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
             })
-        .WithName("CreateProject")
-        .WithOpenApi();
+            .WithName("CreateProject")
+            .WithOpenApi();
 
         _ = group.MapPut("/UpdateProject",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (UpdateProjectRequest request, IMediator mediator) =>
@@ -115,7 +114,7 @@ public static class BuildVersionEndpoints
                 TypedResults.Ok((IEnumerable<BuildVersionResponse>)response.Data) :
                 TypedResults.NotFound();
             })
-        .WithName("GetAll")
+            .WithName("GetAll")
             .WithOpenApi();
 
         return routes;

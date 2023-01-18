@@ -6,11 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65312B32-3EFA-4D7C-B6A1-FB85A83F544B}"
 	ProjectSection(SolutionItems) = preProject
 		BuildWithVersioning.ps1 = BuildWithVersioning.ps1
-		CleanWsl.md = CleanWsl.md
 		DeployWithVersioning.ps1 = DeployWithVersioning.ps1
 		InitBuild.ps1 = InitBuild.ps1
 		InitDeploy.ps1 = InitDeploy.ps1
 		readme.md = readme.md
+		support.md = support.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{988D9AA6-1044-49AA-BF35-9C9F1051729D}"
@@ -49,8 +49,6 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BuildVersions", "BuildVersi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi", "BuildVersionsApi\BuildVersionsApi.csproj", "{B71E4F28-EB75-45D2-AF9D-601204E8844B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.App", "BuildVersionsApi.App\BuildVersionsApi.App.csproj", "{BFF5322A-D46F-4794-829A-94758A6A21DA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Contract", "BuildVersionsApi.Contract\BuildVersionsApi.Contract.csproj", "{530E56A5-8956-408D-AF29-81E8CEDF0BBF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Data", "BuildVersionsApi.Data\BuildVersionsApi.Data.csproj", "{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}"
@@ -79,10 +77,6 @@ Global
 		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFF5322A-D46F-4794-829A-94758A6A21DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
