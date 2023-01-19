@@ -1,6 +1,6 @@
 foreach($name in @(
-	"buildversions", 
-	"buildversionsapi" 
+	"buildversionsapi", 
+	"buildversions" 
 ))
 {
 	#Increase this number manually if building several times
@@ -32,8 +32,27 @@ foreach($name in @(
 		}
 		git checkout deploy/${name}/kustomization.yaml
 	}
+}
 
+$loop = 0
+do
+{
+	$alive = curl.exe -s "http://buildversionsapi.local:8081/Ping" -H "accept: text/plain"
+	if($alive -ne "pong")
+	{
+		"Waiting five seconds for containers to start"
+		start-sleep -s 5
+		loop++
+	}
+}
+while($alive -ne "pong" -and $loop -lt 10)
+
+foreach($name in @(
+	"buildversionsapi", 
+	"buildversions" 
+))
+{
 	#Add current built
-	#$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
-	#curl.exe -X POST http://buildversionsapi.local:8081/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
+	$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
+	curl.exe -X POST http://buildversionsapi.local:8081/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
 }
