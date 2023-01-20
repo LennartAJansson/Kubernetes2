@@ -1,6 +1,6 @@
 foreach($name in @(
-	"buildversions", 
-	"buildversionsapi"
+	"buildversionsapi",
+	"buildversions"
 ))
 {
 	#Increase this number manually if building several times
