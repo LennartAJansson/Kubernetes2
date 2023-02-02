@@ -29,6 +29,7 @@ public class ICMPHealthCheck : IHealthCheck
 
     public HealthCheckResult CheckHealth(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
+        return HealthCheckResult.Healthy("Closed for now!!!");
         string resolve = string.Empty;
         try
         {

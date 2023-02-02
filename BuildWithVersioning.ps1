@@ -1,6 +1,6 @@
 #Assumes you have the project buildversionsapi running on your localhost on port 9000
 #
-$alive = curl.exe -s "http://buildversionsapi.local:8081/Ping" -H "accept: text/plain"
+$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
 if($alive -ne "pong")
 {
 	"You need to do an initial deploy of BuildVersionsApi"
@@ -17,7 +17,7 @@ foreach($name in @(
 	$commit = git log -1 --pretty=format:"%H"
 	$description = "${branch}: ${commit}"
 	$buildVersion = $null
-	$buildVersion = curl.exe -s "http://buildversionsapi.local:8081/buildversions/NewRevisionVersion/$name" | ConvertFrom-Json
+	$buildVersion = curl.exe -s "http://buildversionsapi.local:8080/buildversions/NewRevisionVersion/$name" | ConvertFrom-Json
 	$semanticVersion = $buildVersion.semanticVersion
 	
 	if([string]::IsNullOrEmpty($semanticVersion) -or [string]::IsNullOrEmpty($description)) 

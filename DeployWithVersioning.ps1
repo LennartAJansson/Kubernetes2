@@ -1,6 +1,6 @@
 #Assumes you have the project buildversionsapi running on your localhost on port 9000
 #
-$alive = curl.exe -s "http://buildversionsapi.local:8081/Ping" -H "accept: text/plain"
+$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
 if($alive -ne "pong")
 {
 	"You need to do an initial deploy of BuildVersionsApi"
@@ -14,7 +14,7 @@ foreach($name in @(
 ))
 {
 	$buildVersion = $null
-	$buildVersion = curl.exe -s "http://buildversionsapi.local:8081/buildversions/GetVersionByName/${name}" | ConvertFrom-Json
+	$buildVersion = curl.exe -s "http://buildversionsapi.local:8080/buildversions/GetVersionByName/${name}" | ConvertFrom-Json
 	$semanticVersion = $buildVersion.semanticVersion
 
 	if([string]::IsNullOrEmpty($semanticVersion)) 
@@ -51,7 +51,7 @@ foreach($name in @(
 		git checkout deploy/${name}/kustomization.yaml
 	}
 	#DELETE DATA FROM PROMETHEUS
-	#curl.exe -X POST -g "http://prometheus.local:8081/api/v1/admin/tsdb/delete_series?match[]={app='${name}'}"
+	#curl.exe -X POST -g "http://prometheus.local:8080/api/v1/admin/tsdb/delete_series?match[]={app='${name}'}"
 }
 
 #EXAMPLE OF PROMETHEUS QUERIES:

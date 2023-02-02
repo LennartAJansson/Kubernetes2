@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://buildversionsapi.local:8081',
-  apiUrl: 'http://buildversionsapi.local:8081'
+  baseUrl: 'http://buildversionsapi.local:8080',
+  apiUrl: 'http://buildversionsapi.local:8080'
   // baseUrl: 'https://localhost:7242',
   // apiUrl: 'https://localhost:7242'
 };

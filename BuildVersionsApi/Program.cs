@@ -1,5 +1,4 @@
 using BuildVersionsApi.App.Endpoints;
-using BuildVersionsApi.App.Extensions;
 using BuildVersionsApi.Data.Extensions;
 using BuildVersionsApi.Mediator.Extensions;
 
@@ -17,8 +16,8 @@ builder.Services.AddSingleton<ApplicationInfo>(appInfo);
 _ = builder.Services.AddApplicationHealthChecks(builder.Configuration.GetSection("HealthChecks").Get<HealthCheckParam[]>()
         ?? throw new Exception("HealthCheckParameters is missing in configuration"));
 
-builder.Services.AddAppMediators(); 
-
+builder.Services.AddAppMediators();
+Console.WriteLine(builder.Configuration.GetConnectionString("BuildVersionsDb"));
 builder.Services.AddPersistance(builder.Configuration.GetConnectionString("BuildVersionsDb")
     ?? throw new ArgumentException("Invalid or not found connectionstring"));
 

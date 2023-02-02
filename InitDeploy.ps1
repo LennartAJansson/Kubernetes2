@@ -35,11 +35,11 @@ foreach($name in @(
 }
 
 $loop = 0
-$alive = curl.exe -s "http://buildversionsapi.local:8081/Ping" -H "accept: text/plain"
+$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
 
 do
 {
-	$alive = curl.exe -s "http://buildversionsapi.local:8081/Ping" -H "accept: text/plain"
+	$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
 	if($alive -ne "pong")
 	{
 		"Waiting 10 seconds for containers to start"
@@ -59,11 +59,11 @@ foreach($name in @(
 	"buildversions" 
 ))
 {
-	$found = curl.exe -s "http://buildversionsapi.local:8081/buildversions/GetVersionByName/${name}" -H 'Content-Type: application/json'
+	$found = curl.exe -s "http://buildversionsapi.local:8080/buildversions/GetVersionByName/${name}" -H 'Content-Type: application/json'
 	if([string]::IsNullOrWhiteSpace($found))
 	{
 		"Adding ${name}"
 		$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
-		curl.exe -X POST http://buildversionsapi.local:8081/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
+		curl.exe -X POST http://buildversionsapi.local:8080/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
 	}
 }
