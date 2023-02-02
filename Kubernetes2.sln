@@ -5,6 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65312B32-3EFA-4D7C-B6A1-FB85A83F544B}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		BuildWithVersioning.ps1 = BuildWithVersioning.ps1
 		DeployWithVersioning.ps1 = DeployWithVersioning.ps1
 		InitBuild.ps1 = InitBuild.ps1
