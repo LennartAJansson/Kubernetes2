@@ -12,12 +12,14 @@ public class ICMPHealthCheck : IHealthCheck
     private readonly string? title;
     private readonly string? host;
     private readonly int healthyRoundtripTime;
+    private readonly bool active;
 
-    public ICMPHealthCheck(string title, string host, int healthyRoundtripTime)
+    public ICMPHealthCheck(string title, string host, int healthyRoundtripTime, bool active)
     {
         this.title = title;
         this.host = host;
         this.healthyRoundtripTime = healthyRoundtripTime;
+        this.active = active;
     }
 
     public ICMPHealthCheck(HealthCheckParam param)
@@ -25,11 +27,14 @@ public class ICMPHealthCheck : IHealthCheck
         title = param.Title;
         host = param.Host;
         healthyRoundtripTime = param.HealthyRoundtripTime;
+        active = param.Active;
     }
 
     public HealthCheckResult CheckHealth(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
-        return HealthCheckResult.Healthy("Closed for now!!!");
+        if (!active)
+            return HealthCheckResult.Healthy("Not active!!!");
+
         string resolve = string.Empty;
         try
         {

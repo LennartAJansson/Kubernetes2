@@ -34,7 +34,7 @@ public class PrometheusMiddleware
     {
         //TODO Find a way to name the Gauge and the Counter for each implementation!!!
         string text = $"{httpContext.Request.Method} {httpContext.Request.GetDisplayUrl()}";
-        logger.LogInformation("{timestamp} {info}", DateTime.Now, text);
+        logger.LogDebug("{timestamp} {info}", DateTime.Now, text);
 
         DateTime startDateTime = DateTime.Now;
 
