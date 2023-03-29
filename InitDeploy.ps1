@@ -50,20 +50,26 @@ do
 	{
 		$alive
 	}
-	"Found buildversionsapi running ok"
 }
 while($alive -ne "pong" -and $loop -lt 10)
 
-foreach($name in @(
-	"buildversionsapi", 
-	"buildversions" 
-))
+if($alive -eq "pong")
 {
-	$found = curl.exe -s "http://buildversionsapi.local:8080/buildversions/GetVersionByName/${name}" -H 'Content-Type: application/json'
-	if([string]::IsNullOrWhiteSpace($found))
+	foreach($name in @(
+		"buildversionsapi", 
+		"buildversions" 
+	))
 	{
-		"Adding ${name}"
-		$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
-		curl.exe -X POST http://buildversionsapi.local:8080/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
+		$found = curl.exe -s "http://buildversionsapi.local:8080/buildversions/GetVersionByName/${name}" -H 'Content-Type: application/json'
+		if([string]::IsNullOrWhiteSpace($found))
+		{
+			"Adding ${name}"
+			$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
+			curl.exe -X POST http://buildversionsapi.local:8080/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
+		}
 	}
+}
+else
+{
+	"Timed out waiting for a pong"
 }
