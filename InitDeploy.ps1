@@ -1,30 +1,57 @@
+$hostname = [System.Net.Dns]::GetHostName()
+
+if($hostname -eq "ubk3s")
+{
+	$hostname=".${hostname}"
+	$url = "http://buildversionapi.ubk3s"
+}
+else
+{
+	$hostname=""
+	$url = "http://buildversionsapi.local:8080"
+}
+
 foreach($name in @(
-	"buildversionsapi", 
-	"buildversions" 
+	"BuildVersionsApi",
+	"BuildVersions"
 ))
 {
-	#Increase this number manually if building several times
 	$semanticVersion = "0.0.0.1"
-	"Current deploy: ${name}:${semanticVersion}"
+	"Current deploy: ${env:REGISTRYHOST}/${name}:${semanticVersion}"
 	
-	cd ./deploy/${name}
-	#Set current semanticVersion for this deploy (modifies kustomization.yaml)
-	kustomize edit set image "${env:registryhost}/${name}:${semanticVersion}"
+	if($hostname -eq "")
+	{
+		cd ./deploy/${name}
+	}
+	else
+	{
+		cd ./ubk3s/${name}
+	}
+
+	kustomize edit set image "${env:REGISTRYHOST}/${name}:${semanticVersion}"
 	
-	#Check if this deploy contains any secrets
 	if(Test-Path -Path ./secrets/*)
 	{
 		"Creating secrets"
-		#Set the new secrets (modifies secret.yaml)
-		kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
-			C:/Apps/kubeseal/kubeseal -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
+		if($hostname -eq "")
+		{
+			kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
+				C:/Apps/kubeseal/kubeseal -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
+			cd ../..
+			kubectl apply -k ./deploy/${name}
+		}
+		else
+		{
+			kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
+				kubeseal -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
+			cd ../..
+			kubectl apply -k ./ubk3s/${name}
+		}
 	}
 	
-	cd ../..
-	kubectl apply -k ./deploy/${name}
 	
 	#Restore secret.yaml and kustomization.yaml since this script alters them temporary
-	if([string]::IsNullOrEmpty($env:AGENT_NAME))
+	if([string]::IsNullOrEmpty($env:AGENT_NAME) -and [string]::IsNullOrEmtpy($hostname))
 	{
 		if(Test-Path -Path deploy/${name}/secret.yaml)
 		{
@@ -35,11 +62,11 @@ foreach($name in @(
 }
 
 $loop = 0
-$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
+$alive = curl.exe -s "${url}/Ping" -H "accept: text/plain"
 
 do
 {
-	$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
+	$alive = curl.exe -s "${url}/Ping" -H "accept: text/plain"
 	if($alive -ne "pong")
 	{
 		"Waiting 10 seconds for containers to start"
@@ -60,12 +87,12 @@ if($alive -eq "pong")
 		"buildversions" 
 	))
 	{
-		$found = curl.exe -s "http://buildversionsapi.local:8080/buildversions/GetVersionByName/${name}" -H 'Content-Type: application/json'
+		$found = curl.exe -s "${url}/buildversions/GetVersionByName/${name}" -H 'Content-Type: application/json'
 		if([string]::IsNullOrWhiteSpace($found))
 		{
 			"Adding ${name}"
 			$bv = "{""projectName"": ""$name"",""major"": 0,""minor"": 0,""build"": 0,""revision"": 1,""semanticVersionText"": ""dev""}"
-			curl.exe -X POST http://buildversionsapi.local:8080/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
+			curl.exe -X POST ${url}/buildversions/CreateProject -H 'Content-Type: application/json' -d $bv
 		}
 	}
 }

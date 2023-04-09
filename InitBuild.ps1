@@ -1,14 +1,13 @@
 foreach($name in @(
-	"buildversionsapi",
-	"buildversions"
+	"BuildVersionsApi",
+	"BuildVersions"
 ))
 {
-	#Increase this number manually if building several times
+	$lowerName = $name.ToLower()
 	$semanticVersion = "0.0.0.1"
 	$description = "InitBuild"
-	"Current build: ${name}:${semanticVersion}"
+	"Current build: ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}"
 
-	docker build -f .\${name}\Dockerfile --force-rm -t ${name} --build-arg Version="${semanticVersion}" --build-arg Description="${description}" .
-	docker tag ${name}:latest ${env:registryhost}/${name}:${semanticVersion}
-	docker push $env:registryhost/${name}:$semanticVersion
+	docker build -f ./${name}/Dockerfile --force-rm -t ${env:REGISTRYHOST}/${lowerName}:${semanticVersion} --build-arg Version="${semanticVersion}" --build-arg>
+	docker push ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}}
 }
