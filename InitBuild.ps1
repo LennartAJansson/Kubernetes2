@@ -1,3 +1,14 @@
+$hostname = [System.Net.Dns]::GetHostName()
+
+if($hostname -eq "ubk3s")
+{
+	$configuration="ubk3s"
+}
+else
+{
+	$configuration="production"
+}
+
 foreach($name in @(
 	"BuildVersionsApi",
 	"BuildVersions"
@@ -8,6 +19,6 @@ foreach($name in @(
 	$description = "InitBuild"
 	"Current build: ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}"
 
-	docker build -f ./${name}/Dockerfile --force-rm -t ${env:REGISTRYHOST}/${lowerName}:${semanticVersion} --build-arg Version="${semanticVersion}" --build-arg>
+	docker build -f ./${name}/Dockerfile --force-rm -t ${env:REGISTRYHOST}/${lowerName}:${semanticVersion} --build-arg Version="${semanticVersion}" --build-arg configuration="${configuration}" --build-arg Description="${description}" .
 	docker push ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}}
 }

@@ -3,7 +3,7 @@ FROM node:latest as build-stage
 WORKDIR /app
 COPY ./BuildVersions/. .
 RUN npm install
-ARG configuration=production
+ARG configuration
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx

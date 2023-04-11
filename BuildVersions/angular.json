@@ -35,6 +35,41 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "ubk3s": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ubk3s.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "production": {
               "budgets": [
                 {
@@ -55,14 +90,6 @@
                 }
               ],
               "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -81,6 +108,9 @@
             },
             "development": {
               "browserTarget": "BuildVersions:build:development"
+            },
+            "ubk3s": {
+              "browserTarget": "BuildVersions:build:ubk3s"
             }
           },
           "defaultConfiguration": "development"
