@@ -1,6 +1,28 @@
 #Assumes you have the project buildversionsapi running on your localhost on port 9000
 #
-$alive = curl.exe -s "http://buildversionsapi.local:8080/Ping" -H "accept: text/plain"
+
+$hostname = [System.Net.Dns]::GetHostName()
+
+if($hostname -eq "ubk3s")
+{
+	$hostname=".${hostname}"
+	$url = "http://buildversionsapi.ubk3s"
+	$curl = "curl"
+	$configuration="ubk3s"
+	$deploy = "ubk3s"
+	$kubeseal = "kubeseal"
+}
+else
+{
+	$hostname=""
+	$url = "http://buildversionsapi.local:8080"
+	$curl = "curl.exe"
+	$configuration = "production"
+	$deploy = "deploy"
+	$kubeseal = "C:/Apps/kubeseal/kubeseal"
+}
+
+$alive = &${curl} -s "${url}/Ping" -H "accept: text/plain"
 if($alive -ne "pong")
 {
 	"You need to do an initial deploy of BuildVersionsApi"
@@ -14,7 +36,7 @@ foreach($name in @(
 ))
 {
 	$buildVersion = $null
-	$buildVersion = curl.exe -s "http://buildversionsapi.local:8080/buildversions/GetVersionByName/${name}" | ConvertFrom-Json
+	$buildVersion = &${curl} -s "${url}/buildversions/GetVersionByName/${name}" | ConvertFrom-Json
 	$semanticVersion = $buildVersion.semanticVersion
 
 	if([string]::IsNullOrEmpty($semanticVersion)) 
@@ -24,34 +46,32 @@ foreach($name in @(
 		return
 	}
 
-	"Current deploy: ${name}:${semanticVersion}"
-	"${env:registryhost}/${name}:${semanticVersion}"
+	"Current deploy: ${env:REGISTRYHOST}/${name}:${semanticVersion}"
 
-	cd ./deploy/${name}
-	kustomize edit set image "${env:registryhost}/${name}:${semanticVersion}"
-	
+	cd ./${deploy}/${name}
+
+	kustomize edit set image "${env:REGISTRYHOST}/${name}:${semanticVersion}"
+
 	if(Test-Path -Path ./secrets/*)
 	{
-		#THE FOLDER "./secrets" SHOULD BE LOCATED OUTSIDE OF THE VERSION CONTROL!!!
 		"Creating secrets"
 		kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
-			C:/Apps/kubeseal/kubeseal -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"	
+			&${kubeseal} -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
 	}
-	
+
 	cd ../..
-	kubectl apply -k ./deploy/${name}
+
+	kubectl apply -k ./${deploy}/${name}
 	
-	if([string]::IsNullOrEmpty($env:AGENT_NAME))
+	#Restore secret.yaml and kustomization.yaml since this script alters them temporary
+	if([string]::IsNullOrEmpty($env:AGENT_NAME) -and [string]::IsNullOrEmpty($hostname))
 	{
-		if(Test-Path -Path deploy/${name}/secret.yaml)
+		if(Test-Path -Path ${deploy}/${name}/secret.yaml)
 		{
-			#ALWAYS UNDO THE CHANGE OF ./secret.yaml SO IT NEVER GETS INTO THE VERSION CONTROL
-			git checkout deploy/${name}/secret.yaml
+			git checkout ${deploy}/${name}/secret.yaml
 		}
-		git checkout deploy/${name}/kustomization.yaml
+		git checkout ${deploy}/${name}/kustomization.yaml
 	}
-	#DELETE DATA FROM PROMETHEUS
-	#curl.exe -X POST -g "http://prometheus.local:8080/api/v1/admin/tsdb/delete_series?match[]={app='${name}'}"
 }
 
 #EXAMPLE OF PROMETHEUS QUERIES:
