@@ -17,8 +17,9 @@ foreach($name in @(
         "Current build: ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}"
 
         docker build -f ./${name}/Dockerfile --force-rm -t ${env:REGISTRYHOST}/${lowerName}:${semanticVersion} --build-arg Version="${semanticVersion}" -->
-        docker push ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}}
+        docker push ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}
 }
+
 
 
 

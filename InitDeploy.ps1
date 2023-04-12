@@ -3,7 +3,7 @@ $hostname = [System.Net.Dns]::GetHostName()
 if($hostname -eq "ubk3s")
 {
         $hostname=".${hostname}"
-        $url = "http://buildversionapi.ubk3s"
+        $url = "http://buildversionsapi.ubk3s"
         $curl = "curl"
 }
 else
