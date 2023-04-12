@@ -37,21 +37,28 @@ foreach($name in @(
 		{
 			kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
 				C:/Apps/kubeseal/kubeseal -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
-			cd ../..
-			kubectl apply -k ./deploy/${name}
 		}
 		else
 		{
 			kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
 				kubeseal -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
-			cd ../..
-			kubectl apply -k ./ubk3s/${name}
 		}
 	}
+
+	cd ../..
 	
+	if($hostname -eq "")
+	{
+		kubectl apply -k ./deploy/${name}
+	}
+	else
+	{
+		kubectl apply -k ./ubk3s/${name}
+	}
+
 	
 	#Restore secret.yaml and kustomization.yaml since this script alters them temporary
-	if([string]::IsNullOrEmpty($env:AGENT_NAME) -and [string]::IsNullOrEmtpy($hostname))
+	if([string]::IsNullOrEmpty($env:AGENT_NAME) -and [string]::IsNullOrEmpty($hostname))
 	{
 		if(Test-Path -Path deploy/${name}/secret.yaml)
 		{
