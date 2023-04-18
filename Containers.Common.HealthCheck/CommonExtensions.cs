@@ -11,7 +11,7 @@ public static class HealthCheckExtensions
         IHealthChecksBuilder builder = services.AddHealthChecks();
         foreach (HealthCheckParam check in checks)
         {
-            _ = builder.AddCheck(check.Title ?? string.Empty, new ICMPHealthCheck(check));
+            _ = builder.AddCheck(check.Title ?? string.Empty, new HttpHealthCheck(check));
         }
 
         return services;

@@ -27,12 +27,26 @@ public static class PrometheusMiddlewareExtensions
 
 public static class WebHealthCheckExtensions
 {
-    public static IServiceCollection AddWebApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
+    public static IServiceCollection AddICmpApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
     {
         IHealthChecksBuilder builder = services.AddHealthChecks();
         foreach (HealthCheckParam check in checks)
         {
             _ = builder.AddCheck(check.Title ?? string.Empty, new ICMPHealthCheck(check));
+        }
+
+        _ = builder.ForwardToPrometheus();
+
+
+        return services;
+    }
+
+    public static IServiceCollection AddWebApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
+    {
+        IHealthChecksBuilder builder = services.AddHealthChecks();
+        foreach (HealthCheckParam check in checks)
+        {
+            _ = builder.AddCheck(check.Title ?? string.Empty, new HttpHealthCheck(check));
         }
 
         _ = builder.ForwardToPrometheus();

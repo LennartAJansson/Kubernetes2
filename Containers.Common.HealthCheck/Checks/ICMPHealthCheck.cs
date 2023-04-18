@@ -1,11 +1,11 @@
 ﻿namespace Containers.Common.HealthCheck.Checks;
 
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public class ICMPHealthCheck : IHealthCheck
 {
@@ -33,7 +33,9 @@ public class ICMPHealthCheck : IHealthCheck
     public HealthCheckResult CheckHealth(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
         if (!active)
+        {
             return HealthCheckResult.Healthy("Not active!!!");
+        }
 
         string resolve = string.Empty;
         try
@@ -71,7 +73,7 @@ public class ICMPHealthCheck : IHealthCheck
         }
         catch (Exception e)
         {
-            string err = $"{title} to {host} failed: {e.Message}. {resolve} {e.InnerException!.Message}";
+            string err = $"{title} to {host} failed: {e.Message}. {resolve}";
             return HealthCheckResult.Unhealthy(err);
         }
     }

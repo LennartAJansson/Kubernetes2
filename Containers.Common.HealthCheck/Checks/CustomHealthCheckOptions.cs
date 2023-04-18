@@ -1,10 +1,10 @@
 ﻿namespace Containers.Common.HealthCheck.Checks;
 
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
-
 using System.Net.Mime;
 using System.Text.Json;
+
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Http;
 
 public class CustomHealthCheckOptions : HealthCheckOptions
 {
@@ -27,9 +27,8 @@ public class CustomHealthCheckOptions : HealthCheckOptions
                     name = e.Key,
                     responseTime = e.Value.Duration.TotalMilliseconds,
                     status = e.Value.Status.ToString(),
-                    description = e.Value.Description
+                    description = e.Value.Description,
                 }),
-                totalStatus = r.Status,
                 totalResponseTime = r.TotalDuration.TotalMilliseconds,
             }, jsonSerializerOptions);
             await c.Response.WriteAsync(result);
