@@ -6,11 +6,11 @@ using Containers.Common.Types;
 
 using Microsoft.EntityFrameworkCore;
 
-public class BuildVersionsDbService : IPersistanceService
+public class PersistanceService : IPersistanceService
 {
-    private readonly BuildVersionsDb context;
+    private readonly BuildVersionsDbContext context;
 
-    public BuildVersionsDbService(BuildVersionsDb context)
+    public PersistanceService(BuildVersionsDbContext context)
     {
         this.context = context;
     }

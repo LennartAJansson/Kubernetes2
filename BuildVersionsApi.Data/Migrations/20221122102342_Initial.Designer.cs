@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuildVersionsApi.Data.Migrations
 {
-    [DbContext(typeof(BuildVersionsDb))]
+    [DbContext(typeof(BuildVersionsDbContext))]
     [Migration("20221122102342_Initial")]
     partial class Initial
     {

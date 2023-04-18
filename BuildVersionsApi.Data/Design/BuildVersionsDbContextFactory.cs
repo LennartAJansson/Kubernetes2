@@ -3,19 +3,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-public class BuildVersionsDbContextFactory : IDesignTimeDbContextFactory<BuildVersionsDb>
+public class BuildVersionsDbContextFactory : IDesignTimeDbContextFactory<BuildVersionsDbContext>
 {
+    //TODO Implement User Secrets in DesignTime
     private static readonly string connectionString = "Server=localhost;Port=3306;User=root;Password=password;Database=BuildVersionsNew";
 
-    public BuildVersionsDb CreateDbContext(string[] args)
+    public BuildVersionsDbContext CreateDbContext(string[] args)
     {
         ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
-        DbContextOptionsBuilder<BuildVersionsDb> optionsBuilder = new();
+        DbContextOptionsBuilder<BuildVersionsDbContext> optionsBuilder = new();
         _ = optionsBuilder.UseMySql(connectionString, serverVersion)
             .EnableSensitiveDataLogging()
             .EnableDetailedErrors();
 
-        return new BuildVersionsDb(optionsBuilder.Options);
+        return new BuildVersionsDbContext(optionsBuilder.Options);
     }
 }
 

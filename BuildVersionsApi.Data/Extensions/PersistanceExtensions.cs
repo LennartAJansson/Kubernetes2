@@ -12,8 +12,8 @@ public static class PersistanceExtensions
     {
         ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
 
-        _ = services.AddDbContext<BuildVersionsDb>(options => options.UseMySql(connectionString, serverVersion));
-        _ = services.AddTransient<IPersistanceService, BuildVersionsDbService>();
+        _ = services.AddDbContext<BuildVersionsDbContext>(options => options.UseMySql(connectionString, serverVersion));
+        _ = services.AddTransient<IPersistanceService, PersistanceService>();
 
         return services;
     }
@@ -21,7 +21,7 @@ public static class PersistanceExtensions
     public static IHost ConfigurePersistance(this IHost app)
     {
         using IServiceScope scope = app.Services.CreateScope();
-        _ = scope.ServiceProvider.GetRequiredService<BuildVersionsDb>().EnsureDbExists();
+        _ = scope.ServiceProvider.GetRequiredService<BuildVersionsDbContext>().EnsureDbExists();
 
         return app;
     }

@@ -1,21 +1,21 @@
 ﻿namespace BuildVersionsApi.Data;
 
+using System.Collections.Generic;
+
 using BuildVersionsApi.Model;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 
-using System.Collections.Generic;
-
-public class BuildVersionsDb : DbContext
+public class BuildVersionsDbContext : DbContext
 {
     public DbSet<BuildVersion> BuildVersions => Set<BuildVersion>();
 
     public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-    private ILogger<BuildVersionsDb>? logger;
+    private ILogger<BuildVersionsDbContext>? logger;
 
-    public BuildVersionsDb(DbContextOptions<BuildVersionsDb> options)
+    public BuildVersionsDbContext(DbContextOptions<BuildVersionsDbContext> options)
     : base(options)
     { }
 
@@ -27,7 +27,7 @@ public class BuildVersionsDb : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         _ = optionsBuilder.UseLoggerFactory(loggerFactory);
-        logger = loggerFactory.CreateLogger<BuildVersionsDb>();
+        logger = loggerFactory.CreateLogger<BuildVersionsDbContext>();
     }
 
     public Task EnsureDbExists()
