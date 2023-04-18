@@ -1,4 +1,4 @@
-﻿namespace BuildVersionsApi.Mediator.Extensions;
+﻿namespace BuildVersionsApi.Extensions;
 
 using MediatR;
 

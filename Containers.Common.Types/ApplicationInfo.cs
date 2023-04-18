@@ -9,8 +9,8 @@ public class ApplicationInfo
     {
         ExecutingAssembly = Assembly.GetAssembly(type);
     }
-    public Assembly? ExecutingAssembly { get; private set; }
 
+    public Assembly? ExecutingAssembly { get; private set; }
     public FileVersionInfo? ExecutingFileVersionInfo => FileVersionInfo.GetVersionInfo(ExecutingAssembly!.Location);
     public string? AssemblyVersion => ExecutingAssembly!.GetName().Version?.ToString();
     public string? FileVersion => ExecutingFileVersionInfo?.FileVersion;

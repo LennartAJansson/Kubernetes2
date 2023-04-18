@@ -1,6 +1,4 @@
-﻿namespace BuildVersionsApi.App.Extensions;
-
-using BuildVersionsApi.Mediator.Extensions;
+﻿namespace BuildVersionsApi.Extensions;
 
 using Microsoft.Extensions.DependencyInjection;
 

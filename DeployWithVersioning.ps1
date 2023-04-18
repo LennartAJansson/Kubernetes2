@@ -64,7 +64,8 @@ foreach($name in @(
 	kubectl apply -k ./${deploy}/${name}
 	
 	#Restore secret.yaml and kustomization.yaml since this script alters them temporary
-	if([string]::IsNullOrEmpty($env:AGENT_NAME) -and [string]::IsNullOrEmpty($hostname))
+	#if([string]::IsNullOrEmpty($env:AGENT_NAME) -and [string]::IsNullOrEmpty($hostname))
+	if([string]::IsNullOrEmpty($env:AGENT_NAME))
 	{
 		if(Test-Path -Path ${deploy}/${name}/secret.yaml)
 		{

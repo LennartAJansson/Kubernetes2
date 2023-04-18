@@ -15,7 +15,6 @@ public static class PrometheusMetricsExtensions
     }
     public static IEndpointRouteBuilder MapMetricsEndpoint(this IEndpointRouteBuilder routes)
     {
-        //Makes a route to https://localhost:7242/metrics that will respond with a prometheus record hidden from Swagger
         _ = routes.MapMetrics("/metrics");
 
         return routes;

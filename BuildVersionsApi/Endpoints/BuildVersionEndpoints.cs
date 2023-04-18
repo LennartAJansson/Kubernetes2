@@ -1,6 +1,6 @@
-﻿namespace BuildVersionsApi.App.Endpoints;
+﻿namespace BuildVersionsApi.Endpoints;
 
-using BuildVersionsApi.Contract;
+using BuildVersionsApi.Contracts;
 
 using Containers.Common.Types;
 

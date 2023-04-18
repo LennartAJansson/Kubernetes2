@@ -1,6 +1,6 @@
-using BuildVersionsApi.App.Endpoints;
 using BuildVersionsApi.Data.Extensions;
-using BuildVersionsApi.Mediator.Extensions;
+using BuildVersionsApi.Endpoints;
+using BuildVersionsApi.Extensions;
 
 using Containers.Common.HealthCheck;
 using Containers.Common.HealthCheck.Checks;

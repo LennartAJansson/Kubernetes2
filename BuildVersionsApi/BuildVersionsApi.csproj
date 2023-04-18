@@ -9,14 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="MediatR" Version="12.0.1" />
 	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
 	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-	  <ProjectReference Include="..\BuildVersionsApi.Contract\BuildVersionsApi.Contract.csproj" />
-	  <ProjectReference Include="..\BuildVersionsApi.Mediator\BuildVersionsApi.Mediator.csproj" />
 	  <ProjectReference Include="..\BuildVersionsApi.Data\BuildVersionsApi.Data.csproj" />
 	<ProjectReference Include="..\Containers.Common.HealthCheck\Containers.Common.HealthCheck.csproj" />
 	<ProjectReference Include="..\Containers.Common.Types\Containers.Common.Types.csproj" />

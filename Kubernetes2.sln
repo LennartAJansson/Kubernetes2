@@ -50,11 +50,7 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BuildVersions", "BuildVersi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi", "BuildVersionsApi\BuildVersionsApi.csproj", "{B71E4F28-EB75-45D2-AF9D-601204E8844B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Contract", "BuildVersionsApi.Contract\BuildVersionsApi.Contract.csproj", "{530E56A5-8956-408D-AF29-81E8CEDF0BBF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Data", "BuildVersionsApi.Data\BuildVersionsApi.Data.csproj", "{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Mediator", "BuildVersionsApi.Mediator\BuildVersionsApi.Mediator.csproj", "{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildVersionsApi.Model", "BuildVersionsApi.Model\BuildVersionsApi.Model.csproj", "{33753D2F-EF96-401C-BEF7-0CAC905C34E4}"
 EndProject
@@ -78,18 +74,10 @@ Global
 		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71E4F28-EB75-45D2-AF9D-601204E8844B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{530E56A5-8956-408D-AF29-81E8CEDF0BBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A3AD4A0-5054-47A5-8BED-C27249A3C7DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B09C6F1-A9FD-4136-BE7F-361ACDAA84A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33753D2F-EF96-401C-BEF7-0CAC905C34E4}.Release|Any CPU.ActiveCfg = Release|Any CPU

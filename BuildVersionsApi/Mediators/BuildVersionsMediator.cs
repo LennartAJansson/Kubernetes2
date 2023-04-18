@@ -1,18 +1,16 @@
-﻿namespace BuildVersionsApi.Mediator;
-
-using BuildVersionsApi.Contract;
-using BuildVersionsApi.Data.Services;
-using BuildVersionsApi.Mediator.Mappings;
-using BuildVersionsApi.Model;
-
-using Containers.Common.Mediator;
-
-using MediatR;
+﻿namespace BuildVersionsApi.Mediators;
 
 using System.Threading;
 using System.Threading.Tasks;
 
-public class BuildVersionsMediator : MediatorBase,
+using BuildVersionsApi.Contracts;
+using BuildVersionsApi.Data.Services;
+using BuildVersionsApi.Mappings;
+using BuildVersionsApi.Model;
+
+using MediatR;
+
+public class BuildVersionsMediator :
     IRequestHandler<AddProjectRequest, MediatorResponse>,
     IRequestHandler<UpdateProjectRequest, MediatorResponse>,
     IRequestHandler<IncreaseRequest, MediatorResponse>,
@@ -31,8 +29,8 @@ public class BuildVersionsMediator : MediatorBase,
         BuildVersion? model = await service.AddProject(request.ProjectName, request.Major, request.Minor, request.Build, request.Revision, request.SemanticVersionText);
 
         return model is null
-            ? CreateResponse(404, "Not found", null)
-            : CreateResponse(200, "Ok", model.ToBuildVersionResponse());
+            ? MediatorResponse.Instance(404, "Not found", null)
+            : MediatorResponse.Instance(200, "Ok", model.ToBuildVersionResponse());
     }
 
     public async Task<MediatorResponse> Handle(UpdateProjectRequest request, CancellationToken cancellationToken)
@@ -40,8 +38,8 @@ public class BuildVersionsMediator : MediatorBase,
         BuildVersion? model = await service.UpdateProject(request.Id, request.ProjectName, request.Major, request.Minor, request.Build, request.Revision, request.SemanticVersionText);
 
         return model is null
-            ? CreateResponse(404, "Not found", null)
-            : CreateResponse(200, "Ok", model.ToBuildVersionResponse());
+            ? MediatorResponse.Instance(404, "Not found", null)
+            : MediatorResponse.Instance(200, "Ok", model.ToBuildVersionResponse());
     }
 
     public async Task<MediatorResponse> Handle(IncreaseRequest request, CancellationToken cancellationToken)
@@ -49,8 +47,8 @@ public class BuildVersionsMediator : MediatorBase,
         BuildVersion? model = await service.IncreaseVersion(request.ProjectName, request.Number);
 
         return model is null
-            ? CreateResponse(404, "Not found", null)
-            : CreateResponse(200, "Ok", model.ToBuildVersionResponse());
+            ? MediatorResponse.Instance(404, "Not found", null)
+            : MediatorResponse.Instance(200, "Ok", model.ToBuildVersionResponse());
     }
 
     public async Task<MediatorResponse> Handle(GetBuildVersionByNameRequest request, CancellationToken cancellationToken)
@@ -58,8 +56,8 @@ public class BuildVersionsMediator : MediatorBase,
         BuildVersion? model = await service.GetByName(request.ProjectName);
 
         return model is null
-            ? CreateResponse(404, "Not found", null)
-            : CreateResponse(200, "Ok", model.ToBuildVersionResponse());
+            ? MediatorResponse.Instance(404, "Not found", null)
+            : MediatorResponse.Instance(200, "Ok", model.ToBuildVersionResponse());
     }
 
     public async Task<MediatorResponse> Handle(GetBuildVersionByIdRequest request, CancellationToken cancellationToken)
@@ -67,17 +65,17 @@ public class BuildVersionsMediator : MediatorBase,
         BuildVersion? model = await service.GetById(request.Id);
 
         return model is null
-            ? CreateResponse(404, "Not found", null)
-            : CreateResponse(200, "Ok", model.ToBuildVersionResponse());
+            ? MediatorResponse.Instance(404, "Not found", null)
+            : MediatorResponse.Instance(200, "Ok", model.ToBuildVersionResponse());
     }
 
     public async Task<MediatorResponse> Handle(GetAllBuildVersions request, CancellationToken cancellationToken)
     {
         IEnumerable<BuildVersion> models = await service.GetAll();
 
-        return models.Any()
-            ? CreateResponse(200, "Ok", models.Select(m => m.ToBuildVersionResponse()))
-            : CreateResponse(404, "Not found", Enumerable.Empty<BuildVersionResponse>());
+        return !models.Any()
+            ? MediatorResponse.Instance(404, "Not found", Enumerable.Empty<BuildVersionResponse>())
+            : MediatorResponse.Instance(200, "Ok", models.Select(m => m.ToBuildVersionResponse()));
     }
 }
 

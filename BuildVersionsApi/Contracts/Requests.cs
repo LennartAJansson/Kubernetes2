@@ -1,10 +1,8 @@
-﻿namespace BuildVersionsApi.Contract;
+﻿namespace BuildVersionsApi.Contracts;
 
 using Containers.Common.Types;
 
 using MediatR;
-
-//TODO Synchronize with Requests in WorkloadsBFF
 
 public record AddProjectRequest(string ProjectName, int Major, int Minor, int Build, int Revision, string SemanticVersionText) : IRequest<MediatorResponse>
 {

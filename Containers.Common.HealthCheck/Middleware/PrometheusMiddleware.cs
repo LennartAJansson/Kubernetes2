@@ -1,24 +1,24 @@
 ﻿namespace Containers.Common.HealthCheck.Middleware;
 
+using System;
+using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
 
 using Prometheus;
 
-using System;
-using System.Threading.Tasks;
-
 public class PrometheusMiddleware
 {
     private readonly RequestDelegate _next;
-    protected static Gauge RequestExecuteTime { get; set; } = Metrics.CreateGauge("application_endpoints_executiontime", "Counts total execution time for handling requests",
+    protected static Gauge RequestExecuteTime { get; set; } = Metrics.CreateGauge("buildversionsapi_executiontime", "Counts total execution time for handling requests",
         new GaugeConfiguration
         {
             LabelNames = new[] { "path" }
         });
 
-    protected static Counter Counter { get; set; } = Metrics.CreateCounter("application_endpoints_counter", "Counts total calls for handling requests",
+    protected static Counter Counter { get; set; } = Metrics.CreateCounter("buildversionsapi_counter", "Counts total calls for handling requests",
         new CounterConfiguration
         {
             LabelNames = new[] { "path" }

@@ -1,5 +1,5 @@
-﻿namespace BuildVersionsApi.Mediator.Mappings;
-using BuildVersionsApi.Contract;
+﻿namespace BuildVersionsApi.Mappings;
+using BuildVersionsApi.Contracts;
 using BuildVersionsApi.Model;
 
 public static class MapperExtensions

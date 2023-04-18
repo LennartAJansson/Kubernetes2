@@ -1,4 +1,4 @@
-﻿namespace BuildVersionsApi.Contract;
+﻿namespace BuildVersionsApi.Contracts;
 public record BuildVersionResponse(int Id, string ProjectName, int Major, int Minor, int Build, int Revision,
     string SemanticVersionText, string Version, string Release, string SemanticVersion, string SemanticRelease)
 {
