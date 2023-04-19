@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-public class ApplicationInfo
+public sealed class ApplicationInfo
 {
     public ApplicationInfo(Type type)
     {

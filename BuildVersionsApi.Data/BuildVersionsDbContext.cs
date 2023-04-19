@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 
-public class BuildVersionsDbContext : DbContext
+public sealed class BuildVersionsDbContext : DbContext
 {
     public DbSet<BuildVersion> BuildVersions => Set<BuildVersion>();
 

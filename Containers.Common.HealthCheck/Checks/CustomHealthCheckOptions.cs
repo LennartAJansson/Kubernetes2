@@ -6,7 +6,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 
-public class CustomHealthCheckOptions : HealthCheckOptions
+public sealed class CustomHealthCheckOptions : HealthCheckOptions
 {
     public CustomHealthCheckOptions()
         : base()

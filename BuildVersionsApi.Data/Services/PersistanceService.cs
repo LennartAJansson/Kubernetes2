@@ -6,7 +6,7 @@ using Containers.Common.Types;
 
 using Microsoft.EntityFrameworkCore;
 
-public class PersistanceService : IPersistanceService
+public sealed class PersistanceService : IPersistanceService
 {
     private readonly BuildVersionsDbContext context;
 

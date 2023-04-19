@@ -10,7 +10,7 @@ using BuildVersionsApi.Model;
 
 using MediatR;
 
-public class BuildVersionsMediator :
+public sealed class BuildVersionsMediator :
     IRequestHandler<AddProjectRequest, MediatorResponse>,
     IRequestHandler<UpdateProjectRequest, MediatorResponse>,
     IRequestHandler<IncreaseRequest, MediatorResponse>,

@@ -1,6 +1,7 @@
 ﻿namespace Containers.Common.HealthCheck.Middleware;
 
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using Prometheus;
 
-public class PrometheusMiddleware
+public sealed class PrometheusMiddleware
 {
     private readonly RequestDelegate _next;
     protected static Gauge RequestExecuteTime { get; set; } = Metrics.CreateGauge("buildversionsapi_executiontime", "Counts total execution time for handling requests",
@@ -26,25 +27,28 @@ public class PrometheusMiddleware
 
     public PrometheusMiddleware(RequestDelegate next)
     {
+        //TODO Find a way to name the Gauge and the Counter for each implementation!!!
         _next = next;
     }
 
     // ILogger is injected into InvokeAsync
     public async Task InvokeAsync(HttpContext httpContext, ILogger<PrometheusMiddleware> logger)
     {
-        //TODO Find a way to name the Gauge and the Counter for each implementation!!!
         string text = $"{httpContext.Request.Method} {httpContext.Request.GetDisplayUrl()}";
         logger.LogDebug("{timestamp} {info}", DateTime.Now, text);
 
-        DateTime startDateTime = DateTime.Now;
+        Stopwatch stopwatch = Stopwatch.StartNew();
 
         await _next(httpContext);
 
-        DateTime endDateTime = DateTime.Now;
+        stopwatch.Stop();
 
-        RequestExecuteTime.Labels(httpContext.Request.GetDisplayUrl())
-            .Set((endDateTime - startDateTime).TotalMilliseconds);
-        Counter.Labels(httpContext.Request.GetDisplayUrl())
+        //RequestExecuteTime.Labels(httpContext.Request.GetDisplayUrl())
+        RequestExecuteTime.Labels(httpContext.Request.Path)
+            .Set(stopwatch.ElapsedMilliseconds);
+
+        //Counter.Labels(httpContext.Request.GetDisplayUrl())
+        Counter.Labels(httpContext.Request.Path)
             .Inc();
     }
 }

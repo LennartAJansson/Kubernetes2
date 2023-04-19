@@ -3,7 +3,7 @@
 using System.Runtime.Serialization;
 
 [Serializable]
-internal class BuildVersionNotFoundException : Exception
+internal sealed class BuildVersionNotFoundException : Exception
 {
     public BuildVersionNotFoundException()
     {
@@ -17,7 +17,7 @@ internal class BuildVersionNotFoundException : Exception
     {
     }
 
-    protected BuildVersionNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+    public BuildVersionNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }

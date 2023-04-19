@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-public class ICMPHealthCheck : IHealthCheck
+public sealed class ICMPHealthCheck : IHealthCheck
 {
     private readonly string? title;
     private readonly string? host;

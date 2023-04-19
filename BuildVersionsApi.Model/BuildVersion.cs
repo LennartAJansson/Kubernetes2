@@ -1,6 +1,6 @@
 ﻿namespace BuildVersionsApi.Model;
 
-public class BuildVersion : BaseLoggedEntity
+public sealed class BuildVersion : BaseLoggedEntity
 {
     //https://devopsnet.com/2011/06/09/build-versioning-strategy/
     public int Id { get; set; }

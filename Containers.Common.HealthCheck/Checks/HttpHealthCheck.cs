@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-public class HttpHealthCheck : IHealthCheck
+public sealed class HttpHealthCheck : IHealthCheck
 {
     private readonly string? title;
     private readonly string? host;
