@@ -11,9 +11,9 @@ using Prometheus;
 
 public static class PrometheusMiddlewareExtensions
 {
-    public static IApplicationBuilder UseMyCustomMiddleware(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseRequestMiddleware(this IApplicationBuilder builder)
     {
-        return builder.UseMiddleware<PrometheusMiddleware>();
+        return builder.UseMiddleware<RequestMiddleware>();
     }
 
     public static IApplicationBuilder UseApplicationHealthChecks(this IApplicationBuilder builder)

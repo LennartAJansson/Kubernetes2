@@ -13,7 +13,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ApplicationInfo appInfo = new(typeof(Program));
 builder.Services.AddSingleton<ApplicationInfo>(appInfo);
 
-_ = builder.Services.AddApplicationHealthChecks(builder.Configuration.GetSection("HealthChecks").Get<HealthCheckParam[]>()
+_ = builder.Services.AddWebApplicationHealthChecks(builder.Configuration.GetSection("HealthChecks").Get<HealthCheckParam[]>()
         ?? throw new Exception("HealthCheckParameters is missing in configuration"));
 
 builder.Services.AddAppMediators();
@@ -40,7 +40,7 @@ app.ConfigurePersistance();
 
 app.UseCors();
 
-app.UseMyCustomMiddleware();
+app.UseRequestMiddleware();
 app.UseApplicationHealthChecks();
 app.UsePrometheusMetrics();
 

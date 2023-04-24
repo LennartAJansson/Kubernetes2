@@ -1,7 +1,6 @@
 ﻿namespace Containers.Common.HealthCheck.Middleware;
 
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
@@ -10,45 +9,46 @@ using Microsoft.Extensions.Logging;
 
 using Prometheus;
 
-public sealed class PrometheusMiddleware
+public sealed class RequestMiddleware
 {
-    private readonly RequestDelegate _next;
-    protected static Gauge RequestExecuteTime { get; set; } = Metrics.CreateGauge("buildversionsapi_executiontime", "Counts total execution time for handling requests",
-        new GaugeConfiguration
-        {
-            LabelNames = new[] { "path" }
-        });
+    private readonly RequestDelegate next;
+    public static Gauge? RequestExecuteTime { get; set; }
 
-    protected static Counter Counter { get; set; } = Metrics.CreateCounter("buildversionsapi_counter", "Counts total calls for handling requests",
-        new CounterConfiguration
-        {
-            LabelNames = new[] { "path" }
-        });
+    public static Counter? Counter { get; set; }
 
-    public PrometheusMiddleware(RequestDelegate next)
+    public RequestMiddleware(RequestDelegate next, string counter, string gauge)
     {
-        //TODO Find a way to name the Gauge and the Counter for each implementation!!!
-        _next = next;
+        this.next = next;
+        RequestExecuteTime = Metrics.CreateGauge(gauge, "Counts total execution time for handling requests",
+            new GaugeConfiguration
+            {
+                LabelNames = new[] { "path" }
+            });
+        Counter = Metrics.CreateCounter(counter, "Counts total calls for handling requests",
+            new CounterConfiguration
+            {
+                LabelNames = new[] { "path" }
+            });
     }
 
-    // ILogger is injected into InvokeAsync
-    public async Task InvokeAsync(HttpContext httpContext, ILogger<PrometheusMiddleware> logger)
+    public async Task InvokeAsync(HttpContext httpContext, ILogger<RequestMiddleware> logger)
     {
         string text = $"{httpContext.Request.Method} {httpContext.Request.GetDisplayUrl()}";
         logger.LogDebug("{timestamp} {info}", DateTime.Now, text);
 
-        Stopwatch stopwatch = Stopwatch.StartNew();
+        //Stopwatch stopwatch = Stopwatch.StartNew();
+        //await next(httpContext);
+        //stopwatch.Stop();
+        //RequestExecuteTime?.Labels(httpContext.Request.Path)
+        //    .Set(stopwatch.ElapsedMilliseconds);
 
-        await _next(httpContext);
 
-        stopwatch.Stop();
+        using (RequestExecuteTime?.WithLabels(httpContext.Request.Path).NewTimer())
+        {
+            await next(httpContext);
+        }
 
-        //RequestExecuteTime.Labels(httpContext.Request.GetDisplayUrl())
-        RequestExecuteTime.Labels(httpContext.Request.Path)
-            .Set(stopwatch.ElapsedMilliseconds);
-
-        //Counter.Labels(httpContext.Request.GetDisplayUrl())
-        Counter.Labels(httpContext.Request.Path)
+        Counter?.WithLabels(httpContext.Request.Path)
             .Inc();
     }
 }
