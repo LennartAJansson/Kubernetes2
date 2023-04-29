@@ -1,66 +1,105 @@
 <div class="buildVersion-edit">
-  <h1>{{title}}</h1>
+  <h1>{{ title }}</h1>
   <p *ngIf="this.id && !buildVersion"><em>Loading...</em></p>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
     <!-- Name -->
-    <mat-form-field>
+    <mat-form-field class="text-box-width-200">
       <mat-label>ProjectName:</mat-label>
-      <input matInput formControlName="projectName" required placeholder="Type a projectname">
-
+      <input
+        matInput
+        formControlName="projectName"
+        maxlength="20"
+        required
+        placeholder="Type a projectname"
+      />
+      <!-- <mat-hint>Enter a projectname</mat-hint> -->
       <mat-error *ngIf="this.form.controls['projectName'].errors?.['required']">
-        ProjectName is required.
+        Required.
       </mat-error>
     </mat-form-field>
 
-    <!-- Major -->
-    <mat-form-field>
-      <mat-label>Major</mat-label>
-      <input matInput formControlName="major" required placeholder="Type a Major number">
+    <div class="example-form-fields">
+      <!-- Major -->
+      <mat-form-field class="text-box-width-100">
+        <mat-label>Major</mat-label>
+        <input
+          matInput
+          formControlName="major"
+          maxlength="6"
+          required
+          placeholder="Type a Major number"
+        />
+        <!-- <mat-hint>Type a Major number</mat-hint> -->
+        <mat-error *ngIf="this.form.controls['major'].errors?.['required']">
+          Required.
+        </mat-error>
+      </mat-form-field>
 
-      <mat-error *ngIf="this.form.controls['major'].errors?.['required']">
-        Major number is required.
-      </mat-error>
-    </mat-form-field>
+      <!-- Minor -->
+      <mat-form-field class="text-box-width-100">
+        <mat-label>Minor</mat-label>
+        <input
+          matInput
+          formControlName="minor"
+          maxlength="6"
+          required
+          placeholder="Type a Minor number"
+        />
+        <!-- <mat-hint>Type a Minor number</mat-hint> -->
+        <mat-error *ngIf="this.form.controls['minor'].errors?.['required']">
+          Required.
+        </mat-error>
+      </mat-form-field>
 
-    <!-- Minor -->
-    <mat-form-field>
-      <mat-label>Minor</mat-label>
-      <input matInput formControlName="minor" required placeholder="Type a Minor number">
+      <!-- Build -->
+      <mat-form-field class="text-box-width-100">
+        <mat-label>Build</mat-label>
+        <input
+          matInput
+          formControlName="build"
+          maxlength="6"
+          required
+          placeholder="Type a Build number"
+        />
+        <!-- <mat-hint>Type a Build number</mat-hint> -->
+        <mat-error *ngIf="this.form.controls['build'].errors?.['required']">
+          Required.
+        </mat-error>
+      </mat-form-field>
 
-      <mat-error *ngIf="this.form.controls['minor'].errors?.['required']">
-        Minor number is required.
-      </mat-error>
-    </mat-form-field>
+      <!-- Revision -->
+      <mat-form-field class="text-box-width-100">
+        <mat-label>Revision</mat-label>
+        <input
+          matInput
+          formControlName="revision"
+          maxlength="6"
+          required
+          placeholder="Type a Revision number"
+        />
+        <!-- <mat-hint>Type a Revision number</mat-hint> -->
+        <mat-error *ngIf="this.form.controls['revision'].errors?.['required']">
+          Required.
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <!-- Build -->
-    <mat-form-field>
-      <mat-label>Build</mat-label>
-      <input matInput formControlName="build" required placeholder="Type a Build number">
-
-      <mat-error *ngIf="this.form.controls['build'].errors?.['required']">
-        Build number is required.
-      </mat-error>
-    </mat-form-field>
-
-    <!-- Revision -->
-    <mat-form-field>
-      <mat-label>Revision</mat-label>
-      <input matInput formControlName="revision" required placeholder="Type a Revision number">
-
-      <mat-error *ngIf="this.form.controls['revision'].errors?.['required']">
-        Revision number is required.
-      </mat-error>
-    </mat-form-field>
-
-    <!-- SemanticVersionText -->
-    <mat-form-field>
-      <mat-label>SemanticVersionText</mat-label>
-      <input matInput formControlName="semanticVersionText" required placeholder="Type a SemanticVersionText number">
-
-      <mat-error *ngIf="this.form.controls['semanticVersionText'].errors?.['required']">
-        SemanticVersionText number is required.
+    <!-- SemanticText -->
+    <mat-form-field class="text-box-width-200">
+      <mat-label>SemanticText</mat-label>
+      <input
+        matInput
+        formControlName="semanticVersionText"
+        maxlength="6"
+        required
+        placeholder="Type a SemanticText (dev, alpha, beta, preview, prod)"
+      />
+      <!-- <mat-hint>Type a SemanticText (dev, alpha, beta, preview, prod)</mat-hint> -->
+      <mat-error
+        *ngIf="this.form.controls['semanticVersionText'].errors?.['required']"
+      >
+        Required.
       </mat-error>
     </mat-form-field>
 
@@ -68,7 +107,11 @@
       <button mat-flat-button color="primary" type="submit">
         {{ this.id ? "Save" : "Create" }}
       </button>
-      <button mat-flat-button color="secondary" [routerLink]="['/buildversions']">
+      <button
+        mat-flat-button
+        color="secondary"
+        [routerLink]="['/buildversions']"
+      >
         Cancel
       </button>
     </div>

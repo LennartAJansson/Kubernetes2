@@ -12,7 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BuildVersionsComponent } from './build-versions/build-versions.component';
 import { BuildVersionEditComponent } from './build-versions/build-version-edit.component';
 import { environment } from '../environments/environment';
-import { API_BASE_URL, BuildVersionsApiService } from './services/build-versions-api.service';
+import {
+  API_BASE_URL,
+  BuildVersionsApiService,
+} from './services/build-versions-api.service';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,7 @@ import { API_BASE_URL, BuildVersionsApiService } from './services/build-versions
     NavMenuComponent,
     HealthCheckComponent,
     BuildVersionsComponent,
-    BuildVersionEditComponent
+    BuildVersionEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,12 +32,16 @@ import { API_BASE_URL, BuildVersionsApiService } from './services/build-versions
     AppRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: API_BASE_URL, useValue: environment.apiUrl },
-    BuildVersionsApiService
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+    BuildVersionsApiService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,15 @@
 mat-form-field {
-  display: block;
-  margin: 10px 0;
+  // display: block;
+  // margin: 10px 0;
+}
+.text-box-width-200 {
+  width: 200px !important;
+  min-width: unset !important;
+}
+.text-box-width-100 {
+  width: 100px !important;
+  min-width: unset !important;
+}
+.example-form-fields mat-form-field + mat-form-field {
+  margin-left: 8px;
 }
