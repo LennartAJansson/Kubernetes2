@@ -12,9 +12,10 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 ApplicationInfo appInfo = new(typeof(Program));
 builder.Services.AddSingleton<ApplicationInfo>(appInfo);
+IEnumerable<HealthCheckParam>? healthChecks = builder.Configuration.GetSection("HealthChecks").Get<IEnumerable<HealthCheckParam>>()
+    ?? Enumerable.Empty<HealthCheckParam>();
 
-_ = builder.Services.AddWebApplicationHealthChecks(builder.Configuration.GetSection("HealthChecks").Get<HealthCheckParam[]>()
-        ?? throw new Exception("HealthCheckParameters is missing in configuration"));
+_ = builder.Services.AddApplicationHealthChecks((HealthCheckParam[])healthChecks);
 
 builder.Services.AddAppMediators();
 Console.WriteLine(builder.Configuration.GetConnectionString("BuildVersionsDb"));
@@ -40,7 +41,7 @@ app.ConfigurePersistance();
 
 app.UseCors();
 
-app.UseRequestMiddleware();
+app.UseRequestMiddleware("buildversionsapi_counter", "buildversionsapi_executiontime");
 app.UseApplicationHealthChecks();
 app.UsePrometheusMetrics();
 

@@ -30,7 +30,7 @@ public sealed class ICMPHealthCheck : IHealthCheck
         active = param.Active;
     }
 
-    public HealthCheckResult CheckHealth(HealthCheckContext context, CancellationToken cancellationToken = default)
+    public HealthCheckResult CheckHealth()
     {
         if (!active)
         {
@@ -71,15 +71,13 @@ public sealed class ICMPHealthCheck : IHealthCheck
                     return HealthCheckResult.Unhealthy(err);
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            string err = $"{title} to {host} failed: {e.Message}. {resolve}";
-            return HealthCheckResult.Unhealthy(err);
+            string err = $"{title} to {host} failed: {resolve}";
+            return HealthCheckResult.Unhealthy(err, exception: ex);
         }
     }
 
-    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult(CheckHealth(context, cancellationToken));
-    }
+    public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        => await Task.FromResult(CheckHealth());
 }

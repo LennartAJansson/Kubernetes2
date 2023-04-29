@@ -11,10 +11,8 @@ using Prometheus;
 
 public static class PrometheusMiddlewareExtensions
 {
-    public static IApplicationBuilder UseRequestMiddleware(this IApplicationBuilder builder)
-    {
-        return builder.UseMiddleware<RequestMiddleware>();
-    }
+    public static IApplicationBuilder UseRequestMiddleware(this IApplicationBuilder builder, string counter, string gauge)
+        => builder.UseMiddleware<RequestMiddleware>(counter, gauge);
 
     public static IApplicationBuilder UseApplicationHealthChecks(this IApplicationBuilder builder)
     {
@@ -27,26 +25,26 @@ public static class PrometheusMiddlewareExtensions
 
 public static class WebHealthCheckExtensions
 {
-    public static IServiceCollection AddICmpApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
+    public static IServiceCollection AddApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
     {
         IHealthChecksBuilder builder = services.AddHealthChecks();
         foreach (HealthCheckParam check in checks)
         {
-            _ = builder.AddCheck(check.Title ?? string.Empty, new ICMPHealthCheck(check));
-        }
-
-        _ = builder.ForwardToPrometheus();
-
-
-        return services;
-    }
-
-    public static IServiceCollection AddWebApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
-    {
-        IHealthChecksBuilder builder = services.AddHealthChecks();
-        foreach (HealthCheckParam check in checks)
-        {
-            _ = builder.AddCheck(check.Title ?? string.Empty, new HttpHealthCheck(check));
+            if (check.Title is not null)
+            {
+                if (check.Title.ToLower().StartsWith("http_"))
+                {
+                    _ = builder.AddCheck(check.Title ?? string.Empty, new HttpHealthCheck(check));
+                }
+                else if (check.Title.ToLower().StartsWith("icmp_"))
+                {
+                    _ = builder.AddCheck(check.Title ?? string.Empty, new ICMPHealthCheck(check));
+                }
+                else if (check.Title.ToLower().StartsWith("db_"))
+                {
+                    _ = builder.AddCheck(check.Title ?? string.Empty, new DbHealthCheck(check));
+                }
+            }
         }
 
         _ = builder.ForwardToPrometheus();
