@@ -7,48 +7,11 @@ public sealed class BuildVersion : BaseLoggedEntity
 
     public string ProjectName { get; set; } = "";
 
-    public int Major
-    {
-        get => major;
-        set
-        {
-            if (value > major)
-            {
-                major = value;
-                Minor = 0;
-                Build = 0;
-                Revision = 0;
-            }
-        }
-    }
-    private int major;
-    public int Minor
-    {
-        get => minor;
-        set
-        {
-            if (value > minor)
-            {
-                minor = value;
-                Build = 0;
-                Revision = 0;
-            }
-        }
-    }
-    private int minor;
-    public int Build
-    {
-        get => build;
-        set
-        {
-            if (value > build)
-            {
-                build = value;
-                Revision = 0;
-            }
-        }
-    }
-    private int build;
+    public int Major { get; set; }
+
+    public int Minor { get; set; }
+
+    public int Build { get; set; }
 
     public int Revision { get; set; }
 
