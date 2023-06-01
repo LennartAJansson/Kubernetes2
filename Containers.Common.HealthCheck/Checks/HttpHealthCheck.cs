@@ -36,7 +36,7 @@ public sealed class HttpHealthCheck : IHealthCheck
         try
         {
             using HttpClient client = new();
-            client.BaseAddress = new Uri(host);
+            client.BaseAddress = new Uri(host!);
             client.Timeout = TimeSpan.FromMilliseconds(healthyRoundtripTime * 2);
             Stopwatch stopwatch = Stopwatch.StartNew();
             using HttpResponseMessage response = client.GetAsync("/", cancellationToken).Result;
@@ -54,8 +54,5 @@ public sealed class HttpHealthCheck : IHealthCheck
             return HealthCheckResult.Unhealthy(err);
         }
     }
-    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult(CheckHealth(context, cancellationToken));
-    }
+    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default) => Task.FromResult(CheckHealth(context, cancellationToken));
 }

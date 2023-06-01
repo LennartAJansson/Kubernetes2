@@ -37,11 +37,11 @@ public sealed class DbHealthCheck : IHealthCheck
         {
             return HealthCheckResult.Healthy("Not active!!!");
         }
-        if (HostIsMsSql(host))
+        if (HostIsMsSql(host!))
         {
             return await SqlServerTest(cancellationToken);
         }
-        else if (HostIsMySql(host))
+        else if (HostIsMySql(host!))
         {
             return await MySqlTest(cancellationToken);
         }
@@ -49,10 +49,10 @@ public sealed class DbHealthCheck : IHealthCheck
         return HealthCheckResult.Healthy("Not valid test!!!");
     }
 
-    private bool HostIsMsSql(string host) => host.Contains("Data Source=", StringComparison.OrdinalIgnoreCase) ||
+    private static bool HostIsMsSql(string host) => host.Contains("Data Source=", StringComparison.OrdinalIgnoreCase) ||
         host.Contains("Data Source=Initial Catalog=", StringComparison.OrdinalIgnoreCase);
 
-    private bool HostIsMySql(string host) => host.Contains("Server=", StringComparison.OrdinalIgnoreCase);
+    private static bool HostIsMySql(string host) => host.Contains("Server=", StringComparison.OrdinalIgnoreCase);
 
     private async Task<HealthCheckResult> SqlServerTest(CancellationToken cancellationToken)
     {

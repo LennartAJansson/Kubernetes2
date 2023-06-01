@@ -1,6 +1,7 @@
 ﻿namespace BuildVersionsApi.Endpoints;
 
 using BuildVersionsApi.Contracts;
+using BuildVersionsApi.Mediators;
 
 using Containers.Common.Types;
 
@@ -19,7 +20,7 @@ public static class BuildVersionEndpoints
             .WithTags(nameof(BuildVersionResponse));
 
         _ = group.MapPost("/CreateProject",
-            async Task<Results<Ok<BuildVersionResponse>, NotFound>> (AddProjectRequest request, IMediator mediator) =>
+            async Task<Results<Ok<BuildVersionResponse>, NotFound>> (AddProjectMediator.AddProjectRequest request, IMediator mediator) =>
             {
                 MediatorResponse response = await mediator.Send(request);
                 return response.Data is not null ?
@@ -30,7 +31,7 @@ public static class BuildVersionEndpoints
             .WithOpenApi();
 
         _ = group.MapPut("/UpdateProject",
-            async Task<Results<Ok<BuildVersionResponse>, NotFound>> (UpdateProjectRequest request, IMediator mediator) =>
+            async Task<Results<Ok<BuildVersionResponse>, NotFound>> (UpdateProjectMediator.UpdateProjectRequest request, IMediator mediator) =>
             {
                 MediatorResponse response = await mediator.Send(request);
                 return response.Data is not null ?
@@ -43,7 +44,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/NewMajorVersion/{name}",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (string name, IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(IncreaseRequest.Instance(name, VersionNumber.Major));
+                MediatorResponse response = await mediator.Send(IncreaseMediator.IncreaseRequest.Instance(name, VersionNumber.Major));
                 return response.Data is not null ?
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
@@ -54,7 +55,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/NewMinorVersion/{name}",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (string name, IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(IncreaseRequest.Instance(name, VersionNumber.Minor));
+                MediatorResponse response = await mediator.Send(IncreaseMediator.IncreaseRequest.Instance(name, VersionNumber.Minor));
                 return response.Data is not null ?
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
@@ -65,7 +66,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/NewBuildVersion/{name}",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (string name, IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(IncreaseRequest.Instance(name, VersionNumber.Build));
+                MediatorResponse response = await mediator.Send(IncreaseMediator.IncreaseRequest.Instance(name, VersionNumber.Build));
                 return response.Data is not null ?
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
@@ -76,7 +77,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/NewRevisionVersion/{name}",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (string name, IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(IncreaseRequest.Instance(name, VersionNumber.Revision));
+                MediatorResponse response = await mediator.Send(IncreaseMediator.IncreaseRequest.Instance(name, VersionNumber.Revision));
                 return response.Data is not null ?
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
@@ -87,7 +88,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/GetVersionById/{id}",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (int id, IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(GetBuildVersionByIdRequest.Instance(id));
+                MediatorResponse response = await mediator.Send(GetBuildVersionByIdMediator.GetBuildVersionByIdRequest.Instance(id));
                 return response.Data is not null ?
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
@@ -98,7 +99,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/GetVersionByName/{name}",
             async Task<Results<Ok<BuildVersionResponse>, NotFound>> (string name, IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(GetBuildVersionByNameRequest.Instance(name));
+                MediatorResponse response = await mediator.Send(GetBuildVersionByNameMediator.GetBuildVersionByNameRequest.Instance(name));
                 return response.Data is not null ?
                 TypedResults.Ok((BuildVersionResponse)response.Data) :
                 TypedResults.NotFound();
@@ -109,7 +110,7 @@ public static class BuildVersionEndpoints
         _ = group.MapGet("/GetAll",
             async Task<Results<Ok<IEnumerable<BuildVersionResponse>>, NotFound>> (IMediator mediator) =>
             {
-                MediatorResponse response = await mediator.Send(GetAllBuildVersions.Instance());
+                MediatorResponse response = await mediator.Send(GetAllBuildVersionMediator.GetAllBuildVersions.Instance());
                 return response.Data is not null ?
                 TypedResults.Ok((IEnumerable<BuildVersionResponse>)response.Data) :
                 TypedResults.NotFound();
