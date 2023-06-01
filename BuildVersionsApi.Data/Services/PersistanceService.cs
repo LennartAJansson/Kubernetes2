@@ -10,10 +10,7 @@ public sealed class PersistanceService : IPersistanceService
 {
     private readonly BuildVersionsDbContext context;
 
-    public PersistanceService(BuildVersionsDbContext context)
-    {
-        this.context = context;
-    }
+    public PersistanceService(BuildVersionsDbContext context) => this.context = context;
 
     public async Task<BuildVersion?> AddProject(string projectName, int major = 0, int minor = 0, int build = 0, int revision = 0, string semVerText = "")
     {
@@ -68,12 +65,18 @@ public sealed class PersistanceService : IPersistanceService
         {
             case VersionNumber.Major:
                 model.Major += amount;
+                model.Minor = 0;
+                model.Build = 0;
+                model.Revision = 0;
                 break;
             case VersionNumber.Minor:
                 model.Minor += amount;
+                model.Build = 0;
+                model.Revision = 0;
                 break;
             case VersionNumber.Build:
                 model.Build += amount;
+                model.Revision = 0;
                 break;
             case VersionNumber.Revision:
                 model.Revision += amount;
@@ -99,8 +102,5 @@ public sealed class PersistanceService : IPersistanceService
         return model;
     }
 
-    public Task<IEnumerable<BuildVersion>> GetAll()
-    {
-        return Task.FromResult(context.BuildVersions.AsEnumerable());
-    }
+    public Task<IEnumerable<BuildVersion>> GetAll() => Task.FromResult(context.BuildVersions.AsEnumerable());
 }
