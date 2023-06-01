@@ -17,7 +17,7 @@ IEnumerable<HealthCheckParam>? healthChecks = builder.Configuration.GetSection("
 
 _ = builder.Services.AddApplicationHealthChecks((HealthCheckParam[])healthChecks);
 
-builder.Services.AddAppMediators();
+builder.Services.AddApplication();
 Console.WriteLine(builder.Configuration.GetConnectionString("BuildVersionsDb"));
 builder.Services.AddPersistance(builder.Configuration.GetConnectionString("BuildVersionsDb")
     ?? throw new ArgumentException("Invalid or not found connectionstring"));
