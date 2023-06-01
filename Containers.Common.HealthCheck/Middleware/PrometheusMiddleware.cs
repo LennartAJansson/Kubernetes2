@@ -43,12 +43,12 @@ public sealed class RequestMiddleware
         //    .Set(stopwatch.ElapsedMilliseconds);
 
 
-        using (RequestExecuteTime?.WithLabels(httpContext.Request.Path).NewTimer())
+        using (RequestExecuteTime?.WithLabels(httpContext.Request.Path.ToString().ToLower()).NewTimer())
         {
             await next(httpContext);
         }
 
-        Counter?.WithLabels(httpContext.Request.Path)
+        Counter?.WithLabels(httpContext.Request.Path.ToString().ToLower())
             .Inc();
     }
 }
