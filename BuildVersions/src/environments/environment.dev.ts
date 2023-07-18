@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://buildversionsapi.ubk3s',
-  apiUrl: 'http://buildversionsapi.ubk3s',
-  //  baseUrl: 'https://localhost:7242',
-  //  apiUrl: 'https://localhost:7242'
+  baseUrl: 'https://localhost:7242',
+  apiUrl: 'https://localhost:7242',
 };
 
 /*

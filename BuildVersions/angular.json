@@ -25,13 +25,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -70,7 +65,7 @@
               ],
               "outputHashing": "all"
             },
-            "production": {
+            "local": {
               "budgets": [
                 {
                   "type": "initial",
@@ -86,13 +81,13 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.local.ts"
                 }
               ],
               "outputHashing": "all"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -100,11 +95,10 @@
             "browserTarget": "ng-router:build",
             "open": true,
             "port": 4202
-            //"proxyConfig": "src/proxy.conf.js"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "BuildVersions:build:production"
+            "local": {
+              "browserTarget": "BuildVersions:build:local"
             },
             "development": {
               "browserTarget": "BuildVersions:build:development"
@@ -128,13 +122,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }
