@@ -1,0 +1,72 @@
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+
+metadata:
+  name: ubk3s
+
+servers: 1
+
+kubeAPI: 
+  hostIP: "127.0.0.1"
+  hostPort: "6443"
+
+subnet: "172.28.0.0/16"
+
+volumes:
+  - volume: /data/k8s:/tmp/shared
+    nodeFilters:
+      - server:0
+      - agent:*
+
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+  - port: 3333:3307
+    nodeFilters:
+      - loadbalancer
+  - port: 4222:4222
+    nodeFilters:
+      - loadbalancer
+  - port: 8222:8222
+    nodeFilters:
+      - loadbalancer
+  - port: 6379:6379
+    nodeFilters:
+      - loadbalancer
+  - port: 9092:9092
+    nodeFilters:
+      - loadbalancer
+  - port: 9093:9093
+    nodeFilters:
+      - loadbalancer
+  - port: 9094:9094
+    nodeFilters:
+      - loadbalancer
+  - port: 9095:9095
+    nodeFilters:
+      - loadbalancer
+
+registries:
+  create:
+    name: registry.ubk3s
+    host: "0.0.0.0"
+    hostPort: "5000"
+    volumes:
+      - /data/registry:/var/lib/registry 
+
+options:
+  k3d:
+    wait: true
+    timeout: "60s"
+  k3s:
+    extraArgs:
+      - arg: --tls-san=192.168.1.208
+        nodeFilters:
+          - server:*
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true

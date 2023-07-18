@@ -1,21 +1,18 @@
-$hostname = [System.Net.Dns]::GetHostName()
-$configuration = "production"
-
-if($hostname -eq "ubk3s")
-{
-    $configuration="ubk3s"
-}
-
 foreach($name in @(
-    "BuildVersionsApi",
-    "BuildVersions"
+	"BuildVersionsApi"
 ))
 {
-    $lowerName = $name.ToLower()
-    $semanticVersion = "0.0.0.2"
-    $description = "InitBuild"
-    "Current build: ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}"
+	$registryHost = "registry.local:5000"
+	$semanticVersion = "0.0.0.1"
+	$configuration = "production"
 
-    docker build -f ./${name}/Dockerfile --force-rm -t ${env:REGISTRYHOST}/${lowerName}:${semanticVersion} --build-arg Version="${semanticVersion}" --build-arg configuration="${configuration}" --build-arg Description="${description}" .
-    docker push ${env:REGISTRYHOST}/${lowerName}:${semanticVersion}
+	$lowerName = $name.ToLower()
+	$branch = git rev-parse --abbrev-ref HEAD
+	$commit = git log -1 --pretty=format:"%H"
+	$description = "${branch}: ${commit}"
+
+	"Current build: ${registryHost}/${lowerName}:${semanticVersion}"
+
+	docker build -f ./${name}/Dockerfile --force-rm -t ${registryHost}/${lowerName}:${semanticVersion} --build-arg Version="${semanticVersion}" --build-arg configuration="${configuration}" --build-arg Description="${description}" .
+	docker push ${registryHost}/${lowerName}:${semanticVersion}
 }

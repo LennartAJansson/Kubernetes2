@@ -8,7 +8,11 @@ using Containers.Common.Types;
 
 using Microsoft.OpenApi.Models;
 
+using Serilog;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
 
 ApplicationInfo appInfo = new(typeof(Program));
 builder.Services.AddSingleton<ApplicationInfo>(appInfo);

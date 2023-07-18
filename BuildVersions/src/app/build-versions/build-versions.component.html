@@ -26,7 +26,7 @@
       <th>SemanticRelease</th>
     </tr>
   </thead>
-  <tbody>
+ <tbody>
     <tr *ngFor="let buildVersion of buildVersions">
       <td>
         <!--  <ng-container matColumnDef="projectName">-->
@@ -38,7 +38,7 @@
       <td>{{ buildVersion.version }}</td>
       <td>{{ buildVersion.release }}</td>
       <td>{{ buildVersion.semanticVersion }}</td>
-      <td>{{ buildVersion.semanticRelease }}</td>
+      <td>{{ buildVersion.semanticRelease }}</td> 
     </tr>
   </tbody>
 </table>
