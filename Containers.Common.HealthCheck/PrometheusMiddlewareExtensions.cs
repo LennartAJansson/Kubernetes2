@@ -5,6 +5,7 @@ using Containers.Common.HealthCheck.Middleware;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Prometheus;
@@ -25,7 +26,7 @@ public static class PrometheusMiddlewareExtensions
 
 public static class WebHealthCheckExtensions
 {
-    public static IServiceCollection AddApplicationHealthChecks(this IServiceCollection services, HealthCheckParam[] checks)
+    public static IServiceCollection AddApplicationHealthChecks(this IServiceCollection services, IConfiguration configuration, HealthCheckParam[] checks)
     {
         IHealthChecksBuilder builder = services.AddHealthChecks();
         foreach (HealthCheckParam check in checks)
@@ -42,6 +43,7 @@ public static class WebHealthCheckExtensions
                 }
                 else if (check.Title.ToLower().StartsWith("db_"))
                 {
+                    check.Host = configuration.GetConnectionString(check.Host ?? string.Empty);
                     _ = builder.AddCheck(check.Title ?? string.Empty, new DbHealthCheck(check));
                 }
             }

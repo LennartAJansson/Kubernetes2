@@ -12,14 +12,18 @@ using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog();
+builder.Host.UseSerilog((context, services, configuration) => configuration
+                .ReadFrom.Configuration(context.Configuration)
+                .ReadFrom.Services(services)
+                .Enrich.FromLogContext());
 
 ApplicationInfo appInfo = new(typeof(Program));
-builder.Services.AddSingleton<ApplicationInfo>(appInfo);
+builder.Services.AddSingleton(appInfo);
+
 IEnumerable<HealthCheckParam>? healthChecks = builder.Configuration.GetSection("HealthChecks").Get<IEnumerable<HealthCheckParam>>()
     ?? Enumerable.Empty<HealthCheckParam>();
 
-_ = builder.Services.AddApplicationHealthChecks((HealthCheckParam[])healthChecks);
+_ = builder.Services.AddApplicationHealthChecks(builder.Configuration, (HealthCheckParam[])healthChecks);
 
 builder.Services.AddApplication();
 Console.WriteLine(builder.Configuration.GetConnectionString("BuildVersionsDb"));
