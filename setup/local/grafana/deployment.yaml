@@ -30,7 +30,7 @@ spec:
         volumeMounts:
           - mountPath: /var/lib/grafana
             name: grafana-storage
-            #readOnly: false
+            readOnly: false
           - mountPath: /etc/grafana/provisioning/datasources
             name: grafana-datasources
             readOnly: false
@@ -40,8 +40,5 @@ spec:
               defaultMode: 420
               name: grafana-datasources
         - name: grafana-storage
-          emptyDir: {}
-          #Same as MySql
-        #- name: grafana-storage
-        #  persistentVolumeClaim:
-        #    claimName: grafana-pv-claim
+          persistentVolumeClaim:
+            claimName: grafana-pv-claim
