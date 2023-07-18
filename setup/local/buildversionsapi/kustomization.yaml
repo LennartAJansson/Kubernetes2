@@ -8,5 +8,4 @@ resources:
 - service.yaml
 - deployment.yaml
 - persistentvolume.yaml
-- persistentvolumeclaim.yaml
 - secret.yaml

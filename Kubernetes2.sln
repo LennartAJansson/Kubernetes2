@@ -118,7 +118,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversionsapi", "buildve
 		setup\local\buildversionsapi\kustomization.yaml = setup\local\buildversionsapi\kustomization.yaml
 		setup\local\buildversionsapi\namespace.yaml = setup\local\buildversionsapi\namespace.yaml
 		setup\local\buildversionsapi\persistentvolume.yaml = setup\local\buildversionsapi\persistentvolume.yaml
-		setup\local\buildversionsapi\persistentvolumeclaim.yaml = setup\local\buildversionsapi\persistentvolumeclaim.yaml
 		setup\local\buildversionsapi\secret.yaml = setup\local\buildversionsapi\secret.yaml
 		setup\local\buildversionsapi\service.yaml = setup\local\buildversionsapi\service.yaml
 	EndProjectSection

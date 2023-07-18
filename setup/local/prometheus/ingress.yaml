@@ -16,13 +16,3 @@ spec:
             name: prometheus-service
             port:
               number: 8080
-  - host: "prometheus.ubk3s"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: prometheus-service
-            port:
-              number: 8080

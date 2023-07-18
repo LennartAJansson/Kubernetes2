@@ -16,13 +16,3 @@ spec:
             name: grafana
             port:
               number: 3000
-  - host: "grafana.ubk3s"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: grafana
-            port:
-              number: 3000
