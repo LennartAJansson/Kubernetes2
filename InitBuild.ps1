@@ -2,7 +2,7 @@ foreach($name in @(
 	"BuildVersionsApi"
 ))
 {
-	$registryHost = "registry.local:5000"
+	$registryHost = "registry:5000"
 	$semanticVersion = "0.0.0.1"
 	$configuration = "production"
 

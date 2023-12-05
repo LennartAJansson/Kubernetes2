@@ -1,4 +1,4 @@
-apiVersion: k3d.io/v1alpha4
+apiVersion: k3d.io/v1alpha5
 kind: Simple
 
 metadata:
@@ -13,7 +13,7 @@ kubeAPI:
 subnet: "172.28.0.0/16"
 
 volumes:
-  - volume: C:\data\k8s:/tmp/shared #/tmp/shared är på server-0
+  - volume: D:\data\k8s:/tmp/shared #/tmp/shared är på server-0
     nodeFilters:
       - server:0
       - agent:*
@@ -56,11 +56,14 @@ registries:
     host: "0.0.0.0"
     hostPort: "5000"
     volumes:
-      - C:\data\registry:/var/lib/registry
+      - D:\data\registry:/var/lib/registry
   mirrors:
-    "registry.ubk3s":
+    "registry":
        endpoint:
-         - http://registry.ubk3s:5000
+         - http://registry:5000
+#    "registry.local":
+#       endpoint:
+#         - http://registry.local:5000
 
 options:
   k3d:

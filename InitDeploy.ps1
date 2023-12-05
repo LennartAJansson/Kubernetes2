@@ -2,7 +2,7 @@ foreach($name in @(
 	"buildversionsapi"
 ))
 {
-	$registryHost = "registry.local:5000"
+	$registryHost = "registry:5000"
 	$kubeseal = "kubeseal"
 	$semanticVersion = "0.0.0.1"
 	"Current deploy: ${registryHost}/${name}:${semanticVersion}"
@@ -28,4 +28,6 @@ foreach($name in @(
 		git checkout ./deploy/${name}/secret.yaml
 	}
 	git checkout ./deploy/${name}/kustomization.yaml
+
+	curl -X 'POST' 'http://buildversionsapi.local:8080/buildversions/CreateProject' -H 'Content-Type: application/json' -d '{"projectName": "buildversionsapi", "major": 0, "minor": 0, "build": 0, "revision": 1, "semanticVersionText": "dev"}' 
 }

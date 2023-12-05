@@ -23,6 +23,7 @@ if($alive -ne "pong")
 {
 	"You need to do an initial deploy of BuildVersionsApi"
 	"Please run InitBuildVersion.ps1"
+	"Not responding to request ${url}/Ping"
 	return
 }
 

@@ -4,9 +4,6 @@ kind: Kustomization
 
 namespace: monitoring
 
-#bases:
-#  - ../common
-
 resources:
   - namespace.yaml
   - clusterrole.yaml

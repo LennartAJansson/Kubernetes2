@@ -54,6 +54,6 @@ kubectl apply -k ./${environment}/mysql
 kubectl apply -k ./${environment}/sealedsecrets
 kubectl apply -k ./${environment}/nats
 kubectl apply -k ./${environment}/redis
-#kubectl apply -k ./${environment}/kafka
 kubectl apply -k ./${environment}/prometheus
 kubectl apply -k ./${environment}/grafana
+#kubectl apply -k ./${environment}/kafka
