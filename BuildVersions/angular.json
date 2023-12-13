@@ -113,19 +113,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-router:build",
             "open": true,
-            "port": 4202
+            "port": 4202,
+            "buildTarget": "ng-router:build"
           },
           "configurations": {
             "local": {
-              "browserTarget": "BuildVersions:build:local"
+              "buildTarget": "BuildVersions:build:local"
             },
             "development": {
-              "browserTarget": "BuildVersions:build:development"
+              "buildTarget": "BuildVersions:build:development"
             },
             "ubk3s": {
-              "browserTarget": "BuildVersions:build:ubk3s"
+              "buildTarget": "BuildVersions:build:ubk3s"
             }
           },
           "defaultConfiguration": "development"
@@ -133,7 +133,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BuildVersions:build"
+            "buildTarget": "BuildVersions:build"
           }
         },
         "test": {
