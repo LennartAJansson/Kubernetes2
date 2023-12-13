@@ -4,6 +4,8 @@ foreach($name in @(
 {
 	$registryHost = "registry:5000"
 	$kubeseal = "kubeseal"
+	$curl = "curl.exe"
+	$url = "http://buildversionsapi.local:8080"
 	$semanticVersion = "0.0.0.1"
 	"Current deploy: ${registryHost}/${name}:${semanticVersion}"
 
@@ -29,5 +31,17 @@ foreach($name in @(
 	}
 	git checkout ./deploy/${name}/kustomization.yaml
 
-	curl -X 'POST' 'http://buildversionsapi.local:8080/buildversions/CreateProject' -H 'Content-Type: application/json' -d '{"projectName": "buildversionsapi", "major": 0, "minor": 0, "build": 0, "revision": 1, "semanticVersionText": "dev"}' 
+	$alive = ""
+	while($alive -ne "pong")
+	{
+		"Trying to connect. Could take approx 30 seconds..."
+		Start-Sleep -Seconds 10
+		$alive = &${curl} -s "${url}/Ping"
+		"Result from &${curl} -s ${url}/Ping is: " + $alive
+	}
+
+	&${curl} -X 'POST' 'http://buildversionsapi.local:8080/buildversions/CreateProject' -H 'Content-Type: application/json' -d '{"projectName": "buildversionsapi", "major": 0, "minor": 0, "build": 0, "revision": 1, "semanticVersionText": "dev"}' 
+	&${curl} -X 'POST' 'http://buildversionsapi.local:8080/buildversions/CreateProject' -H 'Content-Type: application/json' -d '{"projectName": "buildversions", "major": 0, "minor": 0, "build": 0, "revision": 1, "semanticVersionText": "dev"}' 
+	""
+	"Done!"
 }
