@@ -41,8 +41,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{09EE56FE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "local", "local", "{EE1E7B36-E5E5-4672-94C1-DA99EB33A318}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ubk3s", "ubk3s", "{F4F84117-7A7D-4094-BF2B-77967D21E15B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{C0D12015-91D5-427B-AE28-A84EDBB31705}"
 	ProjectSection(SolutionItems) = preProject
 		setup\local\grafana\configmap.yaml = setup\local\grafana\configmap.yaml
@@ -101,30 +99,36 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sealedsecrets", "sealedsecr
 		setup\local\sealedsecrets\kustomization.yaml = setup\local\sealedsecrets\kustomization.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversions", "buildversions", "{33935A83-7AD4-4BF2-8EFA-7F20B2FA67A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{58A35CA5-2698-4C81-80E6-F4DA2B64DA71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversionsapi", "buildversionsapi", "{A060FA62-F809-45D4-A3FA-3ECDC1A1EB4B}"
 	ProjectSection(SolutionItems) = preProject
-		setup\local\buildversions\deployment.yaml = setup\local\buildversions\deployment.yaml
-		setup\local\buildversions\ingress.yaml = setup\local\buildversions\ingress.yaml
-		setup\local\buildversions\kustomization.yaml = setup\local\buildversions\kustomization.yaml
-		setup\local\buildversions\namespace.yaml = setup\local\buildversions\namespace.yaml
-		setup\local\buildversions\service.yaml = setup\local\buildversions\service.yaml
+		deploy\buildversionsapi\configmap.yaml = deploy\buildversionsapi\configmap.yaml
+		deploy\buildversionsapi\create-sealed-secret.ps1 = deploy\buildversionsapi\create-sealed-secret.ps1
+		deploy\buildversionsapi\create-sealed-secret.sh = deploy\buildversionsapi\create-sealed-secret.sh
+		deploy\buildversionsapi\deployment.yaml = deploy\buildversionsapi\deployment.yaml
+		deploy\buildversionsapi\ingress.yaml = deploy\buildversionsapi\ingress.yaml
+		deploy\buildversionsapi\kustomization.yaml = deploy\buildversionsapi\kustomization.yaml
+		deploy\buildversionsapi\namespace.yaml = deploy\buildversionsapi\namespace.yaml
+		deploy\buildversionsapi\persistentvolume.yaml = deploy\buildversionsapi\persistentvolume.yaml
+		deploy\buildversionsapi\persistentvolumeclaim.yaml = deploy\buildversionsapi\persistentvolumeclaim.yaml
+		deploy\buildversionsapi\secret.yaml = deploy\buildversionsapi\secret.yaml
+		deploy\buildversionsapi\service.yaml = deploy\buildversionsapi\service.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversionsapi", "buildversionsapi", "{FD34A904-ED70-48DA-A8D4-D3B0AD17252E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secrets", "secrets", "{753E8650-7D34-4460-8931-96522BDC5A11}"
 	ProjectSection(SolutionItems) = preProject
-		setup\local\buildversionsapi\configmap.yaml = setup\local\buildversionsapi\configmap.yaml
-		setup\local\buildversionsapi\deployment.yaml = setup\local\buildversionsapi\deployment.yaml
-		setup\local\buildversionsapi\ingress.yaml = setup\local\buildversionsapi\ingress.yaml
-		setup\local\buildversionsapi\kustomization.yaml = setup\local\buildversionsapi\kustomization.yaml
-		setup\local\buildversionsapi\namespace.yaml = setup\local\buildversionsapi\namespace.yaml
-		setup\local\buildversionsapi\persistentvolume.yaml = setup\local\buildversionsapi\persistentvolume.yaml
-		setup\local\buildversionsapi\secret.yaml = setup\local\buildversionsapi\secret.yaml
-		setup\local\buildversionsapi\service.yaml = setup\local\buildversionsapi\service.yaml
+		deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb = deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb
+		deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsIdentity = deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsIdentity
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secrets", "secrets", "{F47BE144-04FF-489B-BEDE-B129FF29922A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversions", "buildversions", "{E9E3D225-A9E7-4714-AA13-F13DF2B309B6}"
 	ProjectSection(SolutionItems) = preProject
-		setup\local\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb = setup\local\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb
+		deploy\buildversions\deployment.yaml = deploy\buildversions\deployment.yaml
+		deploy\buildversions\ingress.yaml = deploy\buildversions\ingress.yaml
+		deploy\buildversions\kustomization.yaml = deploy\buildversions\kustomization.yaml
+		deploy\buildversions\namespace.yaml = deploy\buildversions\namespace.yaml
+		deploy\buildversions\service.yaml = deploy\buildversions\service.yaml
 	EndProjectSection
 EndProject
 Global
@@ -165,16 +169,15 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EE1E7B36-E5E5-4672-94C1-DA99EB33A318} = {09EE56FE-593E-404C-88E1-519CCB16F188}
-		{F4F84117-7A7D-4094-BF2B-77967D21E15B} = {09EE56FE-593E-404C-88E1-519CCB16F188}
 		{C0D12015-91D5-427B-AE28-A84EDBB31705} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
 		{60289DBD-6F67-4886-BF32-A938B83378C0} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
 		{176FA1E7-F4C1-45B9-AB5D-697EB71ADE30} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
 		{2F5CD312-0066-47F4-B40D-CBE5CDF5949D} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
 		{B0006A03-F465-41B5-96D9-ACCC3E3FEBB4} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
 		{34271612-7661-4AA9-9293-82FD4F1C3C45} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
-		{33935A83-7AD4-4BF2-8EFA-7F20B2FA67A7} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
-		{FD34A904-ED70-48DA-A8D4-D3B0AD17252E} = {EE1E7B36-E5E5-4672-94C1-DA99EB33A318}
-		{F47BE144-04FF-489B-BEDE-B129FF29922A} = {FD34A904-ED70-48DA-A8D4-D3B0AD17252E}
+		{A060FA62-F809-45D4-A3FA-3ECDC1A1EB4B} = {58A35CA5-2698-4C81-80E6-F4DA2B64DA71}
+		{753E8650-7D34-4460-8931-96522BDC5A11} = {A060FA62-F809-45D4-A3FA-3ECDC1A1EB4B}
+		{E9E3D225-A9E7-4714-AA13-F13DF2B309B6} = {58A35CA5-2698-4C81-80E6-F4DA2B64DA71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E98CD0B2-F671-442D-B4E9-238E4474AC80}
