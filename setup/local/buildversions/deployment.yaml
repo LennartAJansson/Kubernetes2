@@ -37,3 +37,4 @@ metadata:
 data:
   DOTNET_ENVIRONMENT: "Production"
   ASPNETCORE_ENVIRONMENT: "Production"
+  ASPNETCORE_HTTP_PORTS: "80"

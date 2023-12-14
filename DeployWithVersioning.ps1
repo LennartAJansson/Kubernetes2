@@ -2,6 +2,7 @@
 #
 
 $hostname = [System.Net.Dns]::GetHostName()
+$namespace = "buildversions"
 
 if($hostname -eq "ubk3s")
 {
@@ -56,7 +57,7 @@ foreach($name in @(
 	{
 		"Creating secrets"
 		kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
-			&${kubeseal} -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
+			&${kubeseal} -n "${namespace}" --controller-namespace kube-system --format yaml > "secret.yaml"
 	}
 
 	cd ../..

@@ -2,6 +2,7 @@ foreach($name in @(
 	"buildversionsapi"
 ))
 {
+	$namespace = "buildversions"
 	$registryHost = "registry:5000"
 	$kubeseal = "kubeseal"
 	$curl = "curl.exe"
@@ -17,7 +18,7 @@ foreach($name in @(
 	{
 		"Creating secrets"
 		kubectl create secret generic ${name}-secret --output json --dry-run=client --from-file=./secrets |
-			&${kubeseal} -n "${name}" --controller-namespace kube-system --format yaml > "secret.yaml"
+			&${kubeseal} -n "${namespace}" --controller-namespace kube-system --format yaml > "secret.yaml"
 	}
 
 	cd ../..
