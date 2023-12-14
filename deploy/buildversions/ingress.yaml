@@ -16,3 +16,13 @@ spec:
             name: buildversions
             port:
               number: 80
+  - host: "buildversions"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: buildversions
+            port:
+              number: 80

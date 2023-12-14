@@ -16,3 +16,13 @@ spec:
             name: buildversionsapi
             port:
               number: 80
+  - host: "buildversionsapi"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: buildversionsapi
+            port:
+              number: 80

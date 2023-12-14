@@ -12,6 +12,6 @@ done
 
 kubectl create secret generic buildversionsapi-secret --output json --dry-run=client ${secrets} | \
     C:/Apps/kubeseal/kubeseal \
-    -n "buildversionsapi" \
+    -n "buildversions" \
     --controller-namespace kube-system \
     --format yaml > "secret.yaml"
