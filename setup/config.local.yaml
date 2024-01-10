@@ -13,7 +13,7 @@ kubeAPI:
 subnet: "172.28.0.0/16"
 
 volumes:
-  - volume: D:\data\k8s:/tmp/shared #/tmp/shared är på server-0
+  - volume: C:\data\k8s:/tmp/shared #/tmp/shared är på server-0
     nodeFilters:
       - server:0
       - agent:*
@@ -56,7 +56,7 @@ registries:
     host: "0.0.0.0"
     hostPort: "5000"
     volumes:
-      - D:\data\registry:/var/lib/registry
+      - C:\data\registry:/var/lib/registry
   mirrors:
     "registry":
        endpoint:
