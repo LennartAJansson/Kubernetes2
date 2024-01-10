@@ -73,7 +73,7 @@ spec:
     spec:
       initContainers:
       - name: config
-        image: redis:6.2.3-alpine
+        image: redis:7.2.4-alpine
         command: [ "sh", "-c" ]
         args:
           - |

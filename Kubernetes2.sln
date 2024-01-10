@@ -94,7 +94,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "redis", "redis", "{B0006A03
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sealedsecrets", "sealedsecrets", "{34271612-7661-4AA9-9293-82FD4F1C3C45}"
 	ProjectSection(SolutionItems) = preProject
-		setup\local\sealedsecrets\controller-norbac.yaml = setup\local\sealedsecrets\controller-norbac.yaml
 		setup\local\sealedsecrets\controller.yaml = setup\local\sealedsecrets\controller.yaml
 		setup\local\sealedsecrets\kustomization.yaml = setup\local\sealedsecrets\kustomization.yaml
 	EndProjectSection
@@ -119,7 +118,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secrets", "secrets", "{753E8650-7D34-4460-8931-96522BDC5A11}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb = deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsDb
-		deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsIdentity = deploy\buildversionsapi\secrets\ConnectionStrings__BuildVersionsIdentity
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildversions", "buildversions", "{E9E3D225-A9E7-4714-AA13-F13DF2B309B6}"
