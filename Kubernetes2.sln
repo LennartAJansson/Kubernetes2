@@ -36,6 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "setup", "setup", "{09EE56FE
 	ProjectSection(SolutionItems) = preProject
 		setup\config.local.yaml = setup\config.local.yaml
 		setup\CreateCluster.ps1 = setup\CreateCluster.ps1
+		setup\DeleteCluster.ps1 = setup\DeleteCluster.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "local", "local", "{EE1E7B36-E5E5-4672-94C1-DA99EB33A318}"
