@@ -4,7 +4,7 @@ foreach($name in @(
 {
 	$namespace = "buildversions"
 	$registryHost = "registry:5000"
-	$kubeseal = "kubeseal"
+	$kubeseal = "c:\apps\kubeseal\kubeseal.exe"
 	$curl = "curl.exe"
 	$url = "http://buildversionsapi.local:8080"
 	$semanticVersion = "0.0.0.1"
