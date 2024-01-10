@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: buildversionsapi-configmap
-data:
-  DOTNET_ENVIRONMENT: "Production"
-  ASPNETCORE_ENVIRONMENT: "Production"
-  #ConnectionStrings__BuildVersionsDb: "Server=mysql.mysql.svc;Port=3307;User=root;Password=password;Database=buildversionsdata"

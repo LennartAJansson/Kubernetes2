@@ -1,2 +1,0 @@
-kubectl create secret generic buildversionsapi-secret --output json --dry-run=client --from-file=./secrets |
-    kubeseal -n "buildversionsapi" --controller-namespace kube-system --format yaml > "secret.yaml"
